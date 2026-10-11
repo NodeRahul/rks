@@ -239,7 +239,7 @@
 
             <h2 class="sp-success-title">Payment Done! 🎉</h2>
             <p class="sp-success-sub">
-                Aapka payment successfully complete ho gaya hai. Abhi direct Google Drive download link par redirect kiya ja raha hai...
+                Aapka payment successfully complete ho gaya hai. Abhi download & access page par redirect kiya ja raha hai...
             </p>
 
             <div class="sp-redirect-box">
@@ -248,8 +248,8 @@
                 <span>seconds...</span>
             </div>
 
-            <a href="#" class="sp-direct-access-btn" id="sp-direct-download-link" target="_blank">
-                <span>📥 Direct Link Par Jayein (Click Here)</span>
+            <a href="download.html" class="sp-direct-access-btn" id="sp-direct-download-link">
+                <span>📥 Direct Access Page Par Jayein (Click Here)</span>
                 <span>&rarr;</span>
             </a>
 
@@ -266,8 +266,8 @@
         const UPI_ID = '8521940641@ptsbi';
         const UPI_URL = 'upi://pay?pa=' + encodeURIComponent(UPI_ID) + '&pn=Rajnish%20Kumar&am=49&cu=INR&tn=Premium%20Captions%20Pack';
         
-        // Google Drive Download Link (Aap is link ko apne exact Drive folder link se replace kar sakte hain)
-        const DOWNLOAD_LINK = 'https://drive.google.com/drive/folders/1wR1-PREMIUM_CAPTIONS_PACK_ACCESS?usp=sharing';
+        // Delivery / Download Page Redirect Link
+        const DOWNLOAD_LINK = 'download.html';
 
         function toggleFaq(el) {
             const answer = el.nextElementSibling;
