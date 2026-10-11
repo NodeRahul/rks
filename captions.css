@@ -352,22 +352,174 @@ body.superprofile-theme::after {
     box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.2);
 }
 
-.sp-phone-group {
-    display: flex;
-    gap: 8px;
-}
-
-.sp-phone-prefix {
-    padding: 13px 14px;
-    background: #f9fafb;
-    border: 1.5px solid #d1d5db;
-    border-radius: 10px;
-    font-size: 0.92rem;
-    font-weight: 600;
-    color: #374151;
+/* Unified Phone Input with Country Code Dropdown (Matching Screenshot) */
+.sp-phone-field-wrapper {
+    position: relative;
     display: flex;
     align-items: center;
-    gap: 4px;
+    background: #ffffff;
+    border: 1.5px solid #d1d5db;
+    border-radius: 10px;
+    transition: all 0.2s ease;
+}
+
+.sp-phone-field-wrapper:focus-within {
+    border-color: #f59e0b;
+    box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.2);
+}
+
+.sp-country-trigger {
+    background: transparent;
+    border: none;
+    border-right: 1.5px solid #e5e7eb;
+    padding: 13px 14px;
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: #1f2937;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    outline: none;
+    user-select: none;
+    border-top-left-radius: 9px;
+    border-bottom-left-radius: 9px;
+    transition: background 0.15s ease;
+}
+
+.sp-country-trigger:hover {
+    background: #f8fafc;
+}
+
+.sp-country-chevron {
+    font-size: 0.65rem;
+    color: #64748b;
+    transition: transform 0.2s ease;
+}
+
+.sp-country-trigger.open .sp-country-chevron {
+    transform: rotate(180deg);
+}
+
+.sp-phone-input {
+    flex: 1;
+    border: none;
+    background: transparent;
+    padding: 13px 16px;
+    font-size: 0.95rem;
+    font-family: inherit;
+    color: #111827;
+    outline: none;
+    border-top-right-radius: 9px;
+    border-bottom-right-radius: 9px;
+}
+
+.sp-phone-input::placeholder {
+    color: #9ca3af;
+}
+
+/* Country Dropdown Popover matching Screenshot */
+.sp-country-dropdown {
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 0;
+    width: 290px;
+    max-width: 95vw;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.18), 0 5px 15px rgba(0, 0, 0, 0.08);
+    z-index: 999999;
+    display: none;
+    animation: spDropdownFade 0.2s ease;
+    overflow: hidden;
+}
+
+.sp-country-dropdown.active {
+    display: block;
+}
+
+@keyframes spDropdownFade {
+    from { opacity: 0; transform: translateY(-6px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.sp-country-search-box {
+    padding: 10px 12px;
+    border-bottom: 1px solid #f1f5f9;
+    background: #f8fafc;
+}
+
+.sp-country-search-box input {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-family: inherit;
+    outline: none;
+    background: #ffffff;
+    color: #1e293b;
+    transition: border 0.2s ease;
+}
+
+.sp-country-search-box input:focus {
+    border-color: #f59e0b;
+}
+
+.sp-country-list {
+    max-height: 230px;
+    overflow-y: auto;
+    list-style: none;
+    margin: 0;
+    padding: 4px 0;
+}
+
+.sp-country-list::-webkit-scrollbar {
+    width: 6px;
+}
+
+.sp-country-list::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 999px;
+}
+
+.sp-country-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 14px;
+    font-size: 0.86rem;
+    color: #334155;
+    cursor: pointer;
+    transition: background 0.12s ease;
+}
+
+.sp-country-item:hover {
+    background: #eff6ff;
+    color: #1d4ed8;
+}
+
+.sp-country-flag {
+    font-size: 1.15rem;
+    line-height: 1;
+}
+
+.sp-country-name {
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.sp-country-code {
+    font-weight: 700;
+    color: #64748b;
+    font-size: 0.82rem;
+}
+
+.sp-country-item:hover .sp-country-code {
+    color: #1d4ed8;
 }
 
 /* Pricing Breakdown */

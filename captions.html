@@ -140,17 +140,26 @@
 
                     <form id="sp-order-form" onsubmit="handleOrderSubmit(event)">
                         <div class="sp-form-group">
-                            <label class="sp-input-label" for="sp-email">Email Address *</label>
-                            <input type="email" id="sp-email" class="sp-input" required placeholder="name@example.com">
+                            <input type="email" id="sp-email" class="sp-input" required placeholder="Email Address">
                         </div>
 
-                        <div class="sp-form-group">
-                            <label class="sp-input-label" for="sp-phone">Phone number *</label>
-                            <div class="sp-phone-group">
-                                <div class="sp-phone-prefix">
-                                    <span>&#x1F1EE;&#x1F1F3; +91</span>
+                        <div class="sp-form-group" style="position: relative;">
+                            <div class="sp-phone-field-wrapper" id="sp-phone-field-wrapper">
+                                <button type="button" class="sp-country-trigger" id="sp-country-trigger" onclick="toggleCountryDropdown(event)">
+                                    <span id="sp-selected-dial">+91</span>
+                                    <span class="sp-country-chevron" id="sp-country-chevron">&#9662;</span>
+                                </button>
+                                <input type="tel" id="sp-phone" class="sp-phone-input" required placeholder="Phone number *" pattern="[0-9]{6,15}" title="Please enter valid phone number">
+                            </div>
+
+                            <!-- Country Dropdown Popover matching Screenshot -->
+                            <div class="sp-country-dropdown" id="sp-country-dropdown">
+                                <div class="sp-country-search-box">
+                                    <input type="text" id="sp-country-search" placeholder="Search country" oninput="filterCountries(event)" autocomplete="off">
                                 </div>
-                                <input type="tel" id="sp-phone" class="sp-input" required placeholder="98765 43210" pattern="[0-9]{10}" title="Please enter 10 digit phone number">
+                                <ul class="sp-country-list" id="sp-country-list">
+                                    <!-- Rendered dynamically by JavaScript -->
+                                </ul>
                             </div>
                         </div>
 
@@ -430,6 +439,179 @@
         
         // Delivery / Download Page Redirect Link
         const DOWNLOAD_LINK = 'download.html';
+
+        // Complete Alphabetical Country Codes Dataset (Matching User Screenshot)
+        const COUNTRIES = [
+            { name: "India", code: "+91", flag: "🇮🇳" },
+            { name: "Afghanistan", code: "+93", flag: "🇦🇫" },
+            { name: "Åland Islands", code: "+358", flag: "🇦🇽" },
+            { name: "Albania", code: "+355", flag: "🇦🇱" },
+            { name: "Algeria", code: "+213", flag: "🇩🇿" },
+            { name: "American Samoa", code: "+1-684", flag: "🇦🇸" },
+            { name: "Andorra", code: "+376", flag: "🇦🇩" },
+            { name: "Angola", code: "+244", flag: "🇦🇴" },
+            { name: "Anguilla", code: "+1-264", flag: "🇦🇮" },
+            { name: "Antigua and Barbuda", code: "+1-268", flag: "🇦🇬" },
+            { name: "Argentina", code: "+54", flag: "🇦🇷" },
+            { name: "Armenia", code: "+374", flag: "🇦🇲" },
+            { name: "Aruba", code: "+297", flag: "🇦🇼" },
+            { name: "Australia", code: "+61", flag: "🇦🇺" },
+            { name: "Austria", code: "+43", flag: "🇦🇹" },
+            { name: "Azerbaijan", code: "+994", flag: "🇦🇿" },
+            { name: "Bahamas", code: "+1-242", flag: "🇧🇸" },
+            { name: "Bahrain", code: "+973", flag: "🇧🇭" },
+            { name: "Bangladesh", code: "+880", flag: "🇧🇩" },
+            { name: "Barbados", code: "+1-246", flag: "🇧🇧" },
+            { name: "Belarus", code: "+375", flag: "🇧🇾" },
+            { name: "Belgium", code: "+32", flag: "🇧🇪" },
+            { name: "Belize", code: "+501", flag: "🇧🇿" },
+            { name: "Benin", code: "+229", flag: "🇧🇯" },
+            { name: "Bermuda", code: "+1-441", flag: "🇧🇲" },
+            { name: "Bhutan", code: "+975", flag: "🇧🇹" },
+            { name: "Bolivia", code: "+591", flag: "🇧🇴" },
+            { name: "Bosnia and Herzegovina", code: "+387", flag: "🇧🇦" },
+            { name: "Botswana", code: "+267", flag: "🇧🇼" },
+            { name: "Brazil", code: "+55", flag: "🇧🇷" },
+            { name: "Brunei", code: "+673", flag: "🇧🇳" },
+            { name: "Bulgaria", code: "+359", flag: "🇧🇬" },
+            { name: "Cambodia", code: "+855", flag: "🇰🇭" },
+            { name: "Cameroon", code: "+237", flag: "🇨🇲" },
+            { name: "Canada", code: "+1", flag: "🇨🇦" },
+            { name: "Chile", code: "+56", flag: "🇨🇱" },
+            { name: "China", code: "+86", flag: "🇨🇳" },
+            { name: "Colombia", code: "+57", flag: "🇨🇴" },
+            { name: "Costa Rica", code: "+506", flag: "🇨🇷" },
+            { name: "Croatia", code: "+385", flag: "🇭🇷" },
+            { name: "Cyprus", code: "+357", flag: "🇨🇾" },
+            { name: "Czech Republic", code: "+420", flag: "🇨🇿" },
+            { name: "Denmark", code: "+45", flag: "🇩🇰" },
+            { name: "Egypt", code: "+20", flag: "🇪🇬" },
+            { name: "Finland", code: "+358", flag: "🇫🇮" },
+            { name: "France", code: "+33", flag: "🇫🇷" },
+            { name: "Germany", code: "+49", flag: "🇩🇪" },
+            { name: "Ghana", code: "+233", flag: "🇬🇭" },
+            { name: "Greece", code: "+30", flag: "🇬🇷" },
+            { name: "Hong Kong", code: "+852", flag: "🇭🇰" },
+            { name: "Hungary", code: "+36", flag: "🇭🇺" },
+            { name: "Iceland", code: "+354", flag: "🇮🇸" },
+            { name: "Indonesia", code: "+62", flag: "🇮🇩" },
+            { name: "Iran", code: "+98", flag: "🇮🇷" },
+            { name: "Iraq", code: "+964", flag: "🇮🇶" },
+            { name: "Ireland", code: "+353", flag: "🇮🇪" },
+            { name: "Israel", code: "+972", flag: "🇮🇱" },
+            { name: "Italy", code: "+39", flag: "🇮🇹" },
+            { name: "Japan", code: "+81", flag: "🇯🇵" },
+            { name: "Jordan", code: "+962", flag: "🇯🇴" },
+            { name: "Kenya", code: "+254", flag: "🇰🇪" },
+            { name: "Kuwait", code: "+965", flag: "🇰🇼" },
+            { name: "Malaysia", code: "+60", flag: "🇲🇾" },
+            { name: "Maldives", code: "+960", flag: "🇲🇻" },
+            { name: "Mexico", code: "+52", flag: "🇲🇽" },
+            { name: "Nepal", code: "+977", flag: "🇳🇵" },
+            { name: "Netherlands", code: "+31", flag: "🇳🇱" },
+            { name: "New Zealand", code: "+64", flag: "🇳🇿" },
+            { name: "Nigeria", code: "+234", flag: "🇳🇬" },
+            { name: "Norway", code: "+47", flag: "🇳🇴" },
+            { name: "Oman", code: "+968", flag: "🇴🇲" },
+            { name: "Pakistan", code: "+92", flag: "🇵🇰" },
+            { name: "Philippines", code: "+63", flag: "🇵🇭" },
+            { name: "Poland", code: "+48", flag: "🇵🇱" },
+            { name: "Portugal", code: "+351", flag: "🇵🇹" },
+            { name: "Qatar", code: "+974", flag: "🇶🇦" },
+            { name: "Russia", code: "+7", flag: "🇷🇺" },
+            { name: "Saudi Arabia", code: "+966", flag: "🇸🇦" },
+            { name: "Singapore", code: "+65", flag: "🇸🇬" },
+            { name: "South Africa", code: "+27", flag: "🇿🇦" },
+            { name: "South Korea", code: "+82", flag: "🇰🇷" },
+            { name: "Spain", code: "+34", flag: "🇪🇸" },
+            { name: "Sri Lanka", code: "+94", flag: "🇱🇰" },
+            { name: "Sweden", code: "+46", flag: "🇸🇪" },
+            { name: "Switzerland", code: "+41", flag: "🇨🇭" },
+            { name: "Taiwan", code: "+886", flag: "🇹🇼" },
+            { name: "Thailand", code: "+66", flag: "🇹🇭" },
+            { name: "Turkey", code: "+90", flag: "🇹🇷" },
+            { name: "United Arab Emirates", code: "+971", flag: "🇦🇪" },
+            { name: "United Kingdom", code: "+44", flag: "🇬🇧" },
+            { name: "United States", code: "+1", flag: "🇺🇸" },
+            { name: "Vietnam", code: "+84", flag: "🇻🇳" }
+        ];
+
+        function renderCountryList(list) {
+            const listEl = document.getElementById('sp-country-list');
+            if (!listEl) return;
+            listEl.innerHTML = '';
+            list.forEach(c => {
+                const li = document.createElement('li');
+                li.className = 'sp-country-item';
+                li.innerHTML = `
+                    <span class="sp-country-flag">${c.flag}</span>
+                    <span class="sp-country-name">${c.name} (${c.code})</span>
+                `;
+                li.onclick = (e) => {
+                    e.stopPropagation();
+                    selectCountry(c);
+                };
+                listEl.appendChild(li);
+            });
+        }
+
+        function toggleCountryDropdown(e) {
+            if (e) e.stopPropagation();
+            const dropdown = document.getElementById('sp-country-dropdown');
+            const trigger = document.getElementById('sp-country-trigger');
+            const isActive = dropdown.classList.contains('active');
+            
+            if (isActive) {
+                dropdown.classList.remove('active');
+                trigger.classList.remove('open');
+            } else {
+                dropdown.classList.add('active');
+                trigger.classList.add('open');
+                const searchInput = document.getElementById('sp-country-search');
+                if (searchInput) {
+                    searchInput.value = '';
+                    renderCountryList(COUNTRIES);
+                    setTimeout(() => searchInput.focus(), 60);
+                }
+            }
+        }
+
+        function selectCountry(c) {
+            document.getElementById('sp-selected-dial').textContent = c.code;
+            const dropdown = document.getElementById('sp-country-dropdown');
+            const trigger = document.getElementById('sp-country-trigger');
+            dropdown.classList.remove('active');
+            trigger.classList.remove('open');
+            const phoneInput = document.getElementById('sp-phone');
+            if (phoneInput) phoneInput.focus();
+        }
+
+        function filterCountries(e) {
+            const query = e.target.value.toLowerCase().trim();
+            const filtered = COUNTRIES.filter(c => 
+                c.name.toLowerCase().includes(query) || c.code.includes(query)
+            );
+            renderCountryList(filtered);
+        }
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', (e) => {
+            const wrapper = document.getElementById('sp-phone-field-wrapper');
+            const dropdown = document.getElementById('sp-country-dropdown');
+            const trigger = document.getElementById('sp-country-trigger');
+            if (dropdown && dropdown.classList.contains('active')) {
+                if (wrapper && !wrapper.contains(e.target)) {
+                    dropdown.classList.remove('active');
+                    if (trigger) trigger.classList.remove('open');
+                }
+            }
+        });
+
+        // Initialize country list immediately and on window load
+        renderCountryList(COUNTRIES);
+        window.addEventListener('DOMContentLoaded', () => {
+            renderCountryList(COUNTRIES);
+        });
 
         let timerInterval = null;
         let remainingSeconds = 14 * 60 + 58; // 14:58 default matching Screenshot 2/3
