@@ -1,0 +1,602 @@
+/* ==========================================================================
+   SUPERPROFILE-STYLE CLEAN LANDING PAGE CSS (captions.css)
+   ========================================================================== */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --primary-yellow: #f59e0b;
+    --primary-yellow-hover: #d97706;
+    --bg-gradient: linear-gradient(135deg, #eab308 0%, #d97706 40%, #b45309 80%, #78350f 100%);
+    --card-bg: #ffffff;
+    --text-main: #111827;
+    --text-muted: #6b7280;
+    --text-light: #9ca3af;
+    --border-color: #e5e7eb;
+    --font-heading: 'Outfit', sans-serif;
+    --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+body.superprofile-theme {
+    font-family: var(--font-body);
+    color: var(--text-main);
+    background: #d97706;
+    background: radial-gradient(circle at 10% 20%, #facc15 0%, #eab308 30%, #d97706 60%, #b45309 100%);
+    min-height: 100vh;
+    padding: 24px 16px 60px;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* Subtle background organic glowing shapes */
+body.superprofile-theme::before {
+    content: '';
+    position: fixed;
+    top: -100px;
+    right: -100px;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(254, 240, 138, 0.45) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 0;
+}
+
+body.superprofile-theme::after {
+    content: '';
+    position: fixed;
+    bottom: -150px;
+    left: -100px;
+    width: 700px;
+    height: 700px;
+    background: radial-gradient(circle, rgba(180, 83, 9, 0.3) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Top Navigation Bar */
+.sp-header {
+    max-width: 1060px;
+    margin: 0 auto 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    z-index: 10;
+}
+
+.sp-creator-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: rgba(0, 0, 0, 0.32);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    padding: 6px 18px 6px 6px;
+    border-radius: 999px;
+    color: #ffffff;
+    text-decoration: none;
+    transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.sp-creator-pill:hover {
+    transform: translateY(-2px);
+    background: rgba(0, 0, 0, 0.42);
+}
+
+.sp-avatar-img {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid rgba(255, 255, 255, 0.6);
+}
+
+.sp-creator-name {
+    font-weight: 700;
+    font-size: 0.95rem;
+    letter-spacing: -0.01em;
+}
+
+.sp-header-right {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.sp-watermark {
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+}
+
+.sp-back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(8px);
+    color: #ffffff;
+    padding: 7px 16px;
+    border-radius: 999px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.sp-back-link:hover {
+    background: rgba(255, 255, 255, 0.35);
+    transform: translateX(-3px);
+}
+
+/* Main Container Card */
+.sp-main-card {
+    max-width: 1060px;
+    margin: 0 auto;
+    background: var(--card-bg);
+    border-radius: 28px;
+    box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.3), 0 0 1px rgba(0,0,0,0.1);
+    padding: 36px;
+    position: relative;
+    z-index: 10;
+}
+
+.sp-grid {
+    display: grid;
+    grid-template-columns: 1.35fr 1fr;
+    gap: 36px;
+    align-items: start;
+}
+
+/* Left Column: Product Details */
+.sp-left-col {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.sp-banner-wrapper {
+    width: 100%;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+    border: 1px solid #f3f4f6;
+    background: #000;
+}
+
+.sp-banner-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+}
+
+.sp-product-title {
+    font-family: var(--font-heading);
+    font-size: 2.2rem;
+    font-weight: 800;
+    line-height: 1.15;
+    color: var(--text-main);
+    letter-spacing: -0.02em;
+}
+
+.sp-meta-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #fef3c7;
+    color: #92400e;
+    font-size: 0.8rem;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 999px;
+    width: fit-content;
+    margin-top: 4px;
+}
+
+.sp-about-section {
+    margin-top: 10px;
+}
+
+.sp-about-label {
+    font-size: 0.82rem;
+    font-weight: 800;
+    color: var(--text-muted);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+}
+
+.sp-features-box {
+    background: #f9fafb;
+    border-radius: 16px;
+    padding: 22px;
+    border: 1px solid var(--border-color);
+}
+
+.sp-features-title {
+    font-size: 0.95rem;
+    font-weight: 800;
+    color: var(--text-main);
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.sp-feature-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.sp-feature-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 0.95rem;
+    color: #374151;
+    line-height: 1.45;
+}
+
+.sp-check {
+    color: #16a34a;
+    font-weight: 800;
+    font-size: 1.1rem;
+    line-height: 1;
+}
+
+/* FAQ Minimal Accordion */
+.sp-faq-section {
+    margin-top: 14px;
+}
+
+.sp-faq-title {
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: var(--text-main);
+    margin-bottom: 14px;
+}
+
+.sp-faq-item {
+    border-bottom: 1px solid var(--border-color);
+    padding: 14px 0;
+}
+
+.sp-faq-question {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text-main);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    user-select: none;
+}
+
+.sp-faq-answer {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+    margin-top: 8px;
+}
+
+/* Right Column: Sticky Checkout Box */
+.sp-right-col {
+    position: sticky;
+    top: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.sp-checkout-card {
+    background: #ffffff;
+    border: 1px solid var(--border-color);
+    border-radius: 22px;
+    padding: 26px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+.sp-checkout-notice {
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: #374151;
+    margin-bottom: 18px;
+    line-height: 1.4;
+}
+
+.sp-form-group {
+    margin-bottom: 14px;
+}
+
+.sp-input-label {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #4b5563;
+    margin-bottom: 6px;
+}
+
+.sp-input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.sp-input {
+    width: 100%;
+    padding: 13px 16px;
+    border: 1.5px solid #d1d5db;
+    border-radius: 10px;
+    font-size: 0.95rem;
+    font-family: inherit;
+    color: #111827;
+    background: #ffffff;
+    transition: all 0.2s ease;
+    outline: none;
+}
+
+.sp-input:focus {
+    border-color: #f59e0b;
+    box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.2);
+}
+
+.sp-phone-group {
+    display: flex;
+    gap: 8px;
+}
+
+.sp-phone-prefix {
+    padding: 13px 14px;
+    background: #f9fafb;
+    border: 1.5px solid #d1d5db;
+    border-radius: 10px;
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: #374151;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+/* Pricing Breakdown */
+.sp-pricing-box {
+    margin: 22px 0 18px;
+    padding-top: 18px;
+    border-top: 1px dashed var(--border-color);
+}
+
+.sp-price-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    font-size: 0.92rem;
+    color: #4b5563;
+}
+
+.sp-old-price {
+    text-decoration: line-through;
+    color: var(--text-light);
+    margin-right: 6px;
+}
+
+.sp-price-total {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: var(--text-main);
+    padding-top: 6px;
+}
+
+.sp-total-num {
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: #111827;
+}
+
+/* Big Gold Button */
+.sp-btn-submit {
+    width: 100%;
+    background: #f59e0b;
+    color: #111827;
+    border: none;
+    border-radius: 10px;
+    padding: 15px 22px;
+    font-size: 1.05rem;
+    font-weight: 800;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 4px 14px rgba(245, 158, 11, 0.35);
+}
+
+.sp-btn-submit:hover {
+    background: #eab308;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(245, 158, 11, 0.5);
+}
+
+.sp-btn-submit:active {
+    transform: translateY(0);
+}
+
+.sp-btn-arrow {
+    font-size: 1.25rem;
+    transition: transform 0.2s ease;
+}
+
+.sp-btn-submit:hover .sp-btn-arrow {
+    transform: translateX(4px);
+}
+
+/* Share / Copy Link Box */
+.sp-share-box {
+    text-align: center;
+}
+
+.sp-share-label {
+    font-size: 0.78rem;
+    font-weight: 800;
+    color: var(--text-muted);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+.sp-copy-btn {
+    width: 100%;
+    background: #ffffff;
+    border: 1.5px solid var(--border-color);
+    border-radius: 12px;
+    padding: 12px 18px;
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: #374151;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 0.2s ease;
+}
+
+.sp-copy-btn:hover {
+    background: #f9fafb;
+    border-color: #d1d5db;
+    color: var(--text-main);
+}
+
+/* Payment QR & WhatsApp Reveal Box */
+.sp-pay-drawer {
+    display: none;
+    margin-top: 18px;
+    padding: 20px;
+    background: #fefce8;
+    border: 1.5px solid #fef08a;
+    border-radius: 16px;
+    animation: drawerFadeIn 0.3s ease;
+}
+
+.sp-pay-drawer.active {
+    display: block;
+}
+
+@keyframes drawerFadeIn {
+    from { opacity: 0; transform: translateY(-8px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.sp-qr-center {
+    text-align: center;
+}
+
+.sp-qr-img {
+    width: 160px;
+    height: 160px;
+    border-radius: 12px;
+    border: 2px solid #eab308;
+    background: #fff;
+    padding: 6px;
+    margin: 10px auto;
+    display: block;
+}
+
+.sp-upi-id-copy {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #1f2937;
+    margin-top: 6px;
+    cursor: pointer;
+}
+
+.sp-wa-btn {
+    margin-top: 14px;
+    width: 100%;
+    background: #25d366;
+    color: #ffffff;
+    border: none;
+    border-radius: 10px;
+    padding: 13px;
+    font-size: 0.95rem;
+    font-weight: 800;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+    transition: background 0.2s ease;
+}
+
+.sp-wa-btn:hover {
+    background: #22c55e;
+}
+
+/* Toast Message */
+.sp-toast {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    background: #111827;
+    color: #fff;
+    padding: 12px 24px;
+    border-radius: 999px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    opacity: 0;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 9999;
+    pointer-events: none;
+}
+
+.sp-toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+/* Responsive */
+@media (max-width: 860px) {
+    .sp-grid {
+        grid-template-columns: 1fr;
+        gap: 28px;
+    }
+    .sp-main-card {
+        padding: 22px;
+        border-radius: 22px;
+    }
+    .sp-product-title {
+        font-size: 1.75rem;
+    }
+    .sp-right-col {
+        position: relative;
+        top: 0;
+    }
+    .sp-watermark {
+        display: none;
+    }
+}

@@ -4,485 +4,259 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>100+ Premium Viral Captions Pack (.MOGRT) | Rajnish Studios</title>
-    <meta name="description" content="Recreate the viral caption styles of Alex Hormozi, Vox, Ali Abdaal, and Iman Gadzhi in Premiere Pro (.mogrt). Only ₹49 today!">
-    <!-- Favicon / Brand Icon -->
+    <meta name="description" content="100+ animated viral captions presets for Adobe Premiere Pro (.mogrt). Hormozi, Vox, Ali Abdaal styles for only ₹49!">
     <link rel="icon" type="image/x-icon" href="./favicon.ico">
     <link rel="icon" type="image/png" sizes="32x32" href="./assets/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="./assets/favicon-16x16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="./assets/apple-touch-icon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <script defer src="https://unpkg.com/lucide@latest"></script>
-    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="captions.css">
 </head>
-<body class="standalone-captions-page">
+<body class="superprofile-theme">
 
-    <!-- Standalone Top Navigation -->
-    <header class="header" style="position: sticky; top: 16px; margin: 16px auto 0;">
-        <div class="logo">
-            <a href="index.html" style="text-decoration:none; color:inherit;">
-                <span>RAJNISH</span><span class="logo-dot">.</span><span class="logo-sub">STUDIOS</span>
+    <!-- Top Bar -->
+    <header class="sp-header">
+        <a href="index.html" class="sp-creator-pill" title="View Rajnish Kumar Portfolio">
+            <img src="./assets/editor_portrait.png" alt="Rajnish Kumar" class="sp-avatar-img">
+            <span class="sp-creator-name">Rajnish Kumar</span>
+        </a>
+
+        <div class="sp-header-right">
+            <span class="sp-watermark">Built with ❤️ on Rajnish Studios</span>
+            <a href="index.html" class="sp-back-link">
+                <span>&larr;</span>
+                <span>Portfolio</span>
             </a>
-        </div>
-        <div class="nav-cta" style="display:flex; align-items:center; gap:12px;">
-            <a href="index.html" class="btn btn-secondary btn-magnetic">
-                <i data-lucide="arrow-left"></i>
-                <span>Main Portfolio</span>
-            </a>
-            <button type="button" class="btn btn-primary btn-magnetic" id="btn-header-buy">
-                <span>Buy Now @ ₹49</span>
-            </button>
         </div>
     </header>
 
-    <!-- Main Pack Section -->
-    <section class="captions-pack-section" id="captions-pack">
-        <div class="container">
+    <!-- Main White SuperProfile Card -->
+    <main class="sp-main-card">
+        <div class="sp-grid">
             
-            <!-- Section Header & Urgency Countdown -->
-            <div class="captions-header-wrapper">
-                <div class="urgency-banner reveal-item">
-                    <span class="urgency-pulse"></span>
-                    <span class="urgency-tag">CREATOR LAUNCH EXCLUSIVE</span>
-                    <span class="urgency-sep">•</span>
-                    <span class="urgency-discount">SAVE 95% TODAY</span>
-                    <span class="urgency-sep">•</span>
-                    <div class="urgency-countdown" id="captions-countdown">
-                        <i data-lucide="clock"></i>
-                        <span>Ends in: <strong id="cd-hours">04</strong>h <strong id="cd-mins">29</strong>m <strong id="cd-secs">48</strong>s</span>
+            <!-- Left Column: Product Banner & Details -->
+            <div class="sp-left-col">
+                <div class="sp-banner-wrapper">
+                    <img src="./assets/captions_banner.jpg" alt="100+ Premium Viral Captions Pack for Premiere Pro" class="sp-banner-img">
+                </div>
+
+                <div>
+                    <h1 class="sp-product-title">100+ Premium Viral Captions Pack</h1>
+                    <div class="sp-meta-badge">
+                        <span>⚡ Adobe Premiere Pro (.mogrt)</span>
+                        <span>•</span>
+                        <span>Instant Download</span>
                     </div>
                 </div>
 
-                <div class="section-header reveal-item" style="margin-top: 1.5rem;">
-                    <div class="subtitle">SIGNATURE EDITING ASSETS</div>
-                    <h2 class="section-title">
-                        100+ Premium Viral Captions Pack <br>
-                        <span class="gradient-text">Only on ₹49</span>
-                    </h2>
-                    <p class="captions-section-desc">
-                        Drag-and-drop animated typography presets for <strong>Adobe Premiere Pro (.mogrt)</strong>. Recreate the viral caption styles of Alex Hormozi, Vox, Ali Abdaal, and Iman Gadzhi in just 1 click — without tedious manual keyframing.
-                    </p>
-                    <div class="section-divider"></div>
-                </div>
-            </div>
-
-            <!-- Main Showcase Grid (Live Interactive Preview + Value Box) -->
-            <div class="captions-showcase-grid">
-                
-                <!-- Left: Interactive Live Caption Simulator -->
-                <div class="caption-preview-card card-glass reveal-item">
-                    <div class="preview-card-header">
-                        <div class="preview-badge">
-                            <span class="live-dot"></span> LIVE STYLE SIMULATOR
-                        </div>
-                        <div class="preview-instructions">
-                            Click tabs below to test live animations
-                        </div>
-                    </div>
-
-                    <!-- Smartphone Mockup Screen -->
-                    <div class="phone-mockup">
-                        <div class="phone-notch"></div>
-                        <div class="phone-screen" id="phone-caption-screen">
-                            <div class="phone-bg-overlay"></div>
-                            
-                            <!-- Creator Profile Overlay -->
-                            <div class="phone-creator-tag">
-                                <div class="creator-avatar-dot"></div>
-                                <span class="creator-handle">@greatestrajnish</span>
-                                <span class="creator-verified"><i data-lucide="check" style="width: 12px; height: 12px;"></i></span>
-                            </div>
-
-                            <!-- Live Animated Caption Container -->
-                            <div class="live-caption-display" id="live-caption-display">
-                                <div class="caption-animated-box hormozi-active" id="caption-animated-box">
-                                    <div class="caption-line">
-                                        <span class="word w1">HOW</span>
-                                        <span class="word w2">TO</span>
-                                        <span class="word w3 highlight-word">SCALE</span>
-                                    </div>
-                                    <div class="caption-line">
-                                        <span class="word w4">YOUR</span>
-                                        <span class="word w5 highlight-pop">REELS 🚀</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Reel Side Actions -->
-                            <div class="phone-side-actions">
-                                <div class="side-btn"><i data-lucide="heart"></i><span>124K</span></div>
-                                <div class="side-btn"><i data-lucide="message-circle"></i><span>1.8K</span></div>
-                                <div class="side-btn"><i data-lucide="bookmark"></i><span>45K</span></div>
-                                <div class="side-btn"><i data-lucide="share-2"></i><span>Share</span></div>
-                            </div>
-
-                            <div class="phone-music-tag">
-                                <i data-lucide="music"></i>
-                                <span>Trending Audio • Rajnish Studios</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Caption Style Switcher Tabs -->
-                    <div class="caption-tabs-wrapper">
-                        <div class="tabs-label"><i data-lucide="sliders"></i> Switch Style Preview:</div>
-                        <div class="caption-style-tabs" id="caption-style-tabs">
-                            <button class="style-tab-btn active" data-style="hormozi">
-                                <i data-lucide="zap"></i> Hormozi Punch
-                            </button>
-                            <button class="style-tab-btn" data-style="cinematic">
-                                <i data-lucide="film"></i> Cinematic Glow
-                            </button>
-                            <button class="style-tab-btn" data-style="vox">
-                                <i data-lucide="highlighter"></i> Vox Highlight
-                            </button>
-                            <button class="style-tab-btn" data-style="neon">
-                                <i data-lucide="sparkles"></i> Neon Cyber
-                            </button>
-                            <button class="style-tab-btn" data-style="karaoke">
-                                <i data-lucide="mic"></i> Karaoke Bounce
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Right: Product Value, Features & Pricing CTA -->
-                <div class="caption-offer-card card-glass reveal-item">
+                <div class="sp-about-section">
+                    <div class="sp-about-label">ABOUT THE PAGE</div>
                     
-                    <!-- Pricing Hero Banner -->
-                    <div class="offer-price-container">
-                        <div class="price-top-meta">
-                            <span class="tag-limited"><i data-lucide="sparkles"></i> LIMITED LAUNCH OFFER</span>
-                            <span class="tag-savings">SAVE 95%</span>
+                    <div class="sp-features-box">
+                        <div class="sp-features-title">
+                            <span>INSIDE THIS PACK:</span>
                         </div>
-                        <div class="price-figures">
-                            <span class="currency">₹</span>
-                            <span class="amount">49</span>
-                            <span class="original-price">₹999</span>
-                            <span class="price-period">/ One-Time</span>
-                        </div>
-                        <p class="price-subtext">
-                            ☕ <strong>Chai se bhi sasta!</strong> Pay once, use forever on unlimited videos.
-                        </p>
-                    </div>
-
-                    <!-- Included Feature List -->
-                    <div class="offer-features-list">
-                        <h4 class="features-heading">
-                            <i data-lucide="check-circle-2"></i> Pack Me Kya-Kya Milega:
-                        </h4>
-                        <ul class="features-ul">
-                            <li>
-                                <div class="feat-icon"><i data-lucide="check"></i></div>
-                                <div><strong>100+ Animated Captions MOGRTs</strong> — 1-Click Drag & Drop in Premiere Pro</div>
+                        <ul class="sp-feature-list">
+                            <li class="sp-feature-item">
+                                <span class="sp-check">&#10003;</span>
+                                <div><strong>100+ Animated Captions MOGRTs</strong> &mdash; 1-Click Drag & Drop in Premiere Pro</div>
                             </li>
-                            <li>
-                                <div class="feat-icon"><i data-lucide="check"></i></div>
-                                <div><strong>Top Creator Styles</strong> — Hormozi, Vox, Ali Abdaal, Iman Gadzhi & Minimalist</div>
+                            <li class="sp-feature-item">
+                                <span class="sp-check">&#10003;</span>
+                                <div><strong>Viral Creator Styles</strong> &mdash; Alex Hormozi, Vox, Ali Abdaal, Neon & Minimalist</div>
                             </li>
-                            <li>
-                                <div class="feat-icon"><i data-lucide="check"></i></div>
-                                <div><strong>Essential Graphics Ready</strong> — Font, color, box & size 1-click me customize karein</div>
+                            <li class="sp-feature-item">
+                                <span class="sp-check">&#10003;</span>
+                                <div><strong>Essential Graphics Ready</strong> &mdash; Easily change font, color, box size, and animation speed</div>
                             </li>
-                            <li>
-                                <div class="feat-icon"><i data-lucide="check"></i></div>
-                                <div><strong>All Premiere Versions</strong> — Premiere Pro CC 2021 se CC 2025+ fully supported</div>
+                            <li class="sp-feature-item">
+                                <span class="sp-check">&#10003;</span>
+                                <div><strong>Bonus #1:</strong> 50+ Kinetic Caption Sound Effects (SFX)</div>
                             </li>
-                            <li>
-                                <div class="feat-icon"><i data-lucide="check"></i></div>
-                                <div><strong>100% Commercial License</strong> — Unlimited client & personal reels me use karein</div>
+                            <li class="sp-feature-item">
+                                <span class="sp-check">&#10003;</span>
+                                <div><strong>Bonus #2:</strong> 50+ Viral Reels Hook Formula Guide (PDF)</div>
+                            </li>
+                            <li class="sp-feature-item">
+                                <span class="sp-check">&#10003;</span>
+                                <div><strong>Bonus #3:</strong> 2-Minute Step-by-Step Drag & Drop Video Setup Tutorial</div>
+                            </li>
+                            <li class="sp-feature-item">
+                                <span class="sp-check">&#10003;</span>
+                                <div><strong>100% Commercial License</strong> &mdash; Use freely in unlimited client & personal reels</div>
+                            </li>
+                            <li class="sp-feature-item">
+                                <span class="sp-check">&#10003;</span>
+                                <div><strong>All Premiere Versions</strong> &mdash; Compatible with CC 2021, 2022, 2023, 2024, 2025+</div>
                             </li>
                         </ul>
                     </div>
-
-                    <!-- Free Bonuses Included -->
-                    <div class="bonuses-box">
-                        <div class="bonuses-title">
-                            <i data-lucide="gift"></i> Free Fast-Action Bonuses (Worth ₹1,499)
-                        </div>
-                        <div class="bonuses-grid">
-                            <div class="bonus-item">
-                                <span class="bonus-tag">FREE BONUS #1</span>
-                                <div class="bonus-name">50+ Viral Reels Hook Formula Guide (PDF)</div>
-                            </div>
-                            <div class="bonus-item">
-                                <span class="bonus-tag">FREE BONUS #2</span>
-                                <div class="bonus-name">50+ Kinetic Caption Sound Effects (SFX)</div>
-                            </div>
-                            <div class="bonus-item">
-                                <span class="bonus-tag">FREE BONUS #3</span>
-                                <div class="bonus-name">2-Min Drag & Drop Setup Video Tutorial</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Action Buttons -->
-                    <div class="offer-actions">
-                        <button class="btn btn-primary btn-block btn-magnetic btn-buy-caption" id="btn-open-checkout">
-                            <span>Get Instant Access @ ₹49</span>
-                            <i data-lucide="arrow-right"></i>
-                        </button>
-                        <a href="https://wa.me/918521940641?text=Hi%20Rajnish%2C%20I%20want%20the%20100%2B%20Premium%20Captions%20Pack%20for%20Premiere%20Pro%20(%E2%82%B949)." target="_blank" class="btn btn-secondary btn-block btn-magnetic">
-                            <i data-lucide="message-circle"></i>
-                            <span>Buy Directly on WhatsApp (₹49)</span>
-                        </a>
-                    </div>
-
-                    <!-- Trust Bar -->
-                    <div class="caption-trust-bar">
-                        <div class="trust-item"><i data-lucide="zap"></i> Instant Download Link</div>
-                        <div class="trust-item"><i data-lucide="shield-check"></i> 100% Secure Payment</div>
-                        <div class="trust-item"><i data-lucide="star"></i> 4.9/5 Rating (1.2K+ Editors)</div>
-                    </div>
-
-                </div>
-            </div>
-
-            <!-- Preset Cards Showcase (Visual Grid of Included Presets) -->
-            <div class="caption-presets-grid reveal-item">
-                <div class="preset-card card-glass">
-                    <div class="preset-card-icon" style="color: #facc15;"><i data-lucide="flame"></i></div>
-                    <h4>Hormozi Style</h4>
-                    <p>High-contrast yellow/green words with aggressive scaling & emoji pop for maximum retention.</p>
-                    <span class="preset-count">25 Presets</span>
                 </div>
 
-                <div class="preset-card card-glass">
-                    <div class="preset-card-icon" style="color: #38bdf8;"><i data-lucide="highlighter"></i></div>
-                    <h4>Vox Highlighter</h4>
-                    <p>Dynamic highlighter box that wipes over keywords to emphasize critical storytelling moments.</p>
-                    <span class="preset-count">20 Presets</span>
-                </div>
-
-                <div class="preset-card card-glass">
-                    <div class="preset-card-icon" style="color: #a855f7;"><i data-lucide="type"></i></div>
-                    <h4>Cinematic Minimal</h4>
-                    <p>Clean luxury typography with subtle blur-in and cinematic soft lighting for aesthetic reels.</p>
-                    <span class="preset-count">20 Presets</span>
-                </div>
-
-                <div class="preset-card card-glass">
-                    <div class="preset-card-icon" style="color: #ec4899;"><i data-lucide="radio"></i></div>
-                    <h4>Karaoke Bounce</h4>
-                    <p>Word-by-word active glow as the creator speaks, proven to keep viewer eyes glued to the center.</p>
-                    <span class="preset-count">20 Presets</span>
-                </div>
-
-                <div class="preset-card card-glass">
-                    <div class="preset-card-icon" style="color: #10b981;"><i data-lucide="layers"></i></div>
-                    <h4>Dual-Tone Cyber</h4>
-                    <p>Modern gradient text with smooth slide, glitch, and kinetic impact transitions.</p>
-                    <span class="preset-count">15 Presets</span>
-                </div>
-
-                <div class="preset-card card-glass">
-                    <div class="preset-card-icon" style="color: #f97316;"><i data-lucide="volume-2"></i></div>
-                    <h4>Bonus SFX Pack</h4>
-                    <p>Hand-picked sound effects that pair seamlessly with every text pop, bounce, and transition.</p>
-                    <span class="preset-count">50+ Sounds</span>
-                </div>
-            </div>
-
-            <!-- FAQ Section for Captions Pack -->
-            <div class="captions-faq-container card-glass reveal-item">
-                <h3 class="faq-main-title">
-                    <i data-lucide="help-circle"></i> Frequently Asked Questions
-                </h3>
-                <div class="faq-accordion" id="captions-faq">
+                <!-- Minimal FAQ -->
+                <div class="sp-faq-section">
+                    <h3 class="sp-faq-title">Frequently Asked Questions</h3>
                     
-                    <div class="faq-item active">
-                        <button class="faq-question">
+                    <div class="sp-faq-item">
+                        <div class="sp-faq-question" onclick="toggleFaq(this)">
                             <span>Payment ke baad mujhe pack kaise milega?</span>
-                            <i data-lucide="chevron-down"></i>
-                        </button>
-                        <div class="faq-answer">
-                            Payment complete hote hi aapko instant <strong>Google Drive Direct Download Link</strong> screen par show hoga aur aapke WhatsApp/Email par bhi 30 seconds ke andar deliver ho jayega.
+                            <span>&#9662;</span>
+                        </div>
+                        <div class="sp-faq-answer">
+                            Payment complete hote hi screen par instant Google Drive Direct Download link show ho jayega, aur aapke WhatsApp/Email par bhi turant link deliver ho jayega.
                         </div>
                     </div>
 
-                    <div class="faq-item">
-                        <button class="faq-question">
+                    <div class="sp-faq-item">
+                        <div class="sp-faq-question" onclick="toggleFaq(this)">
                             <span>Kya yeh mere Premiere Pro me kaam karega?</span>
-                            <i data-lucide="chevron-down"></i>
-                        </button>
-                        <div class="faq-answer">
-                            Haan! Yeh presets native <strong>.mogrt</strong> format me hain aur Adobe Premiere Pro CC 2021, 2022, 2023, 2024, aur 2025+ ke sabhi versions ke sath 100% compatible hain. Kisi third-party plugin ki zaroorat nahi hai.
+                            <span>&#9662;</span>
+                        </div>
+                        <div class="sp-faq-answer">
+                            Haan! Yeh presets native .mogrt format me hain aur Adobe Premiere Pro CC 2021 se CC 2025+ ke sabhi versions ke sath 100% compatible hain. Kisi third-party plugin ki zaroorat nahi hai.
                         </div>
                     </div>
 
-                    <div class="faq-item">
-                        <button class="faq-question">
+                    <div class="sp-faq-item">
+                        <div class="sp-faq-question" onclick="toggleFaq(this)">
                             <span>Kya main ise client ke videos me use kar sakta hoon?</span>
-                            <i data-lucide="chevron-down"></i>
-                        </button>
-                        <div class="faq-answer">
-                            Haan, bilkul! Is pack me full <strong>Commercial License</strong> included hai. Aap ise unlimited client videos, brand commercials, aur personal Instagram Reels/YouTube Shorts me freely use kar sakte hain.
+                            <span>&#9662;</span>
+                        </div>
+                        <div class="sp-faq-answer">
+                            Haan, bilkul! Is pack me full Commercial License included hai. Aap ise unlimited client videos, brand commercials, aur personal Instagram Reels/YouTube Shorts me freely use kar sakte hain.
                         </div>
                     </div>
-
-                    <div class="faq-item">
-                        <button class="faq-question">
-                            <span>Fonts aur Colors kaise change honge?</span>
-                            <i data-lucide="chevron-down"></i>
-                        </button>
-                        <div class="faq-answer">
-                            Premiere Pro ke 'Essential Graphics' panel me 1-click controls diye gaye hain jahan se aap font family, text size, color palette, background box opacity, aur animation speed ko aasani se customize kar sakte hain. Pack ke sath step-by-step video guide bhi free milta hai.
-                        </div>
-                    </div>
-
                 </div>
             </div>
 
-            <!-- Bottom Callout -->
-            <div class="captions-bottom-cta card-glass reveal-item">
-                <div class="bottom-cta-info">
-                    <h4>Apne reels ki retention aur watch-time badhayein</h4>
-                    <p>Launch discount sirf aaj ke liye valid hai. ₹49 me instant lifetime access lein.</p>
+            <!-- Right Column: Clean Sticky Checkout Box -->
+            <div class="sp-right-col">
+                <div class="sp-checkout-card">
+                    <p class="sp-checkout-notice">
+                        Access to this purchase will be sent to this email
+                    </p>
+
+                    <form id="sp-order-form" onsubmit="handleOrderSubmit(event)">
+                        <div class="sp-form-group">
+                            <label class="sp-input-label" for="sp-email">Email Address *</label>
+                            <input type="email" id="sp-email" class="sp-input" required placeholder="name@example.com">
+                        </div>
+
+                        <div class="sp-form-group">
+                            <label class="sp-input-label" for="sp-phone">Phone number *</label>
+                            <div class="sp-phone-group">
+                                <div class="sp-phone-prefix">
+                                    <span>&#x1F1EE;&#x1F1F3; +91</span>
+                                </div>
+                                <input type="tel" id="sp-phone" class="sp-input" required placeholder="98765 43210" pattern="[0-9]{10}" title="Please enter 10 digit phone number">
+                            </div>
+                        </div>
+
+                        <div class="sp-pricing-box">
+                            <div class="sp-price-row">
+                                <span>Sub Total</span>
+                                <span><span class="sp-old-price">&#8377;1,500</span> &#8377;49</span>
+                            </div>
+                            <div class="sp-price-total">
+                                <span>Total</span>
+                                <span class="sp-total-num">&#8377;49</span>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="sp-btn-submit" id="sp-submit-btn">
+                            <span>Get it now</span>
+                            <span class="sp-btn-arrow">&rarr;</span>
+                        </button>
+                    </form>
+
+                    <!-- Payment Details Reveal Box -->
+                    <div class="sp-pay-drawer" id="sp-pay-drawer">
+                        <div class="sp-qr-center">
+                            <strong style="color: #92400e; font-size: 0.95rem;">Scan & Pay &#8377;49 via GPay / PhonePe / Paytm</strong>
+                            <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=upi%3A%2F%2Fpay%3Fpa%3D8521940641%40ybl%26pn%3DRajnish%20Kumar%26am%3D49%26cu%3DINR%26tn%3DPremium%20Captions%20Pack" alt="UPI QR Code" class="sp-qr-img">
+                            
+                            <div class="sp-upi-id-copy" onclick="copyUpiId()">
+                                <span>UPI: <strong>8521940641@ybl</strong></span>
+                                <span style="font-size: 0.8rem; color: #f59e0b;">[Copy]</span>
+                            </div>
+
+                            <a href="https://wa.me/918521940641?text=Hi%20Rajnish%2C%20I%20have%20paid%20Rs.49%20for%20the%20100%2B%20Premium%20Captions%20Pack.%20Please%20send%20me%20the%20Drive%20download%20link." target="_blank" class="sp-wa-btn" id="sp-wa-link">
+                                <span>Send Payment on WhatsApp</span>
+                                <span>&rarr;</span>
+                            </a>
+                        </div>
+                    </div>
                 </div>
-                <div class="bottom-cta-action">
-                    <div class="bottom-cta-price">₹49 <span class="old-price">₹999</span></div>
-                    <button class="btn btn-primary btn-magnetic" id="btn-bottom-checkout">
-                        <span>Get Presets @ ₹49</span>
-                        <i data-lucide="arrow-up-right"></i>
+
+                <!-- Invite / Copy Link Box -->
+                <div class="sp-share-box">
+                    <div class="sp-share-label">INVITE YOUR NETWORK</div>
+                    <button type="button" class="sp-copy-btn" onclick="copyPageLink()">
+                        <span>&#128279;</span>
+                        <span>Copy link</span>
                     </button>
                 </div>
             </div>
 
         </div>
-    </section>
+    </main>
 
-    <!-- Captions Checkout Modal -->
-    <div class="captions-modal" id="captions-checkout-modal">
-        <div class="captions-modal-backdrop" id="captions-modal-backdrop"></div>
-        <div class="captions-modal-dialog card-glass">
-            <button class="captions-modal-close" id="captions-modal-close" aria-label="Close Modal">
-                <i data-lucide="x"></i>
-            </button>
+    <!-- Toast Notification -->
+    <div class="sp-toast" id="sp-toast">Link copied to clipboard!</div>
 
-            <div class="modal-badge">
-                <i data-lucide="sparkles"></i> INSTANT ACCESS
-            </div>
-            
-            <h3 class="modal-product-title">100+ Premium Viral Captions Pack</h3>
-            <p class="modal-product-sub">Adobe Premiere Pro (.mogrt) Presets + Free SFX & Hooks</p>
-
-            <div class="modal-price-box">
-                <div class="modal-price-left">
-                    <span class="price-lbl">Total Payable</span>
-                    <span class="price-val">₹49 <span class="modal-old-strike">₹999</span></span>
-                </div>
-                <div class="modal-price-badge">95% OFF</div>
-            </div>
-
-            <!-- Direct Checkout Form / Payment Options -->
-            <form id="captions-payment-form" class="captions-modal-form">
-                <div class="form-group">
-                    <label for="cust-name">Your Name</label>
-                    <input type="text" id="cust-name" required placeholder="e.g. Rahul Sharma">
-                </div>
-
-                <div class="form-group">
-                    <label for="cust-phone">WhatsApp Number (For Instant Delivery)</label>
-                    <input type="tel" id="cust-phone" required placeholder="e.g. 9876543210">
-                </div>
-
-                <div class="form-group">
-                    <label for="cust-email">Email Address</label>
-                    <input type="email" id="cust-email" required placeholder="e.g. rahul@gmail.com">
-                </div>
-
-                <!-- UPI Payment Section -->
-                <div class="upi-pay-container">
-                    <div class="upi-header">
-                        <i data-lucide="qr-code"></i>
-                        <span>Scan & Pay ₹49 via Any UPI App</span>
-                    </div>
-                    
-                    <div class="upi-qr-wrapper">
-                        <div class="qr-code-frame">
-                            <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=upi%3A%2F%2Fpay%3Fpa%3D8521940641%40ybl%26pn%3DRajnish%20Kumar%26am%3D49%26cu%3DINR%26tn%3DPremium%20Captions%20Pack" alt="UPI QR Code - Pay ₹49" class="upi-qr-img" id="upi-qr-image">
-                            <div class="qr-center-icon">₹49</div>
-                        </div>
-                        <div class="upi-details">
-                            <div class="upi-id-box">
-                                <span class="upi-label">UPI ID:</span>
-                                <span class="upi-code" id="upi-id-text">8521940641@ybl</span>
-                                <button type="button" class="copy-upi-btn" id="copy-upi-btn" title="Copy UPI ID">
-                                    <i data-lucide="copy"></i>
-                                </button>
-                            </div>
-                            <div class="upi-apps-icons">
-                                <span class="app-pill">GPay</span>
-                                <span class="app-pill">PhonePe</span>
-                                <span class="app-pill">Paytm</span>
-                                <span class="app-pill">BHIM</span>
-                            </div>
-                            <p class="upi-instruction">
-                                1. Scan QR ya UPI ID par <strong>₹49</strong> pay karein.<br>
-                                2. "Confirm & Get Download Link" par click karein.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                <button type="submit" class="btn btn-primary btn-block btn-magnetic btn-confirm-pay">
-                    <i data-lucide="check-circle-2"></i>
-                    <span>Confirm Payment & Get Download Link</span>
-                </button>
-
-                <div class="whatsapp-alt-pay">
-                    <span>Or prefer instant WhatsApp checkout?</span>
-                    <a href="https://wa.me/918521940641?text=Hi%20Rajnish%2C%20I%20want%20to%20buy%20the%20Premium%20Captions%20Pack%20(Rs.%2049)." target="_blank" class="wa-direct-link">
-                        <i data-lucide="message-circle"></i> Chat on WhatsApp directly
-                    </a>
-                </div>
-            </form>
-
-            <!-- Success State inside Modal -->
-            <div class="captions-success-screen" id="captions-success-screen" style="display: none;">
-                <div class="success-icon-wrap">
-                    <i data-lucide="check-circle" class="modal-success-check"></i>
-                </div>
-                <h3>Order Submitted Successfully!</h3>
-                <p>Aapka ₹49 order record ho gaya hai. Instant Drive Download access paane ke liye WhatsApp confirmation send karein:</p>
-                
-                <div class="success-download-actions">
-                    <a href="https://wa.me/918521940641?text=Hi%20Rajnish%2C%20I%20have%20paid%20Rs.49%20for%20the%20Premium%20Captions%20Pack.%20Please%20send%20me%20the%20drive%20link." target="_blank" class="btn btn-primary btn-block btn-magnetic" id="btn-wa-confirm">
-                        <i data-lucide="message-circle"></i>
-                        <span>Send Confirmation on WhatsApp</span>
-                    </a>
-                    <button type="button" class="btn btn-secondary btn-block" id="btn-close-success">
-                        <span>Done</span>
-                    </button>
-                </div>
-            </div>
-
-        </div>
-    </div>
-
-    <!-- Footer -->
-    <footer class="footer" style="margin-top: 60px;">
-        <div class="container footer-content">
-            <div class="footer-brand">
-                <div class="logo">
-                    <span>RAJNISH</span><span class="logo-dot">.</span><span class="logo-sub">STUDIOS</span>
-                </div>
-                <p>Designed for elite content performance. 100+ viral typography MOGRT presets.</p>
-            </div>
-            <div class="footer-bottom" style="width: 100%; text-align: center; margin-top: 20px;">
-                <p>&copy; 2026 RAJNISH STUDIOS. All Rights Reserved. <a href="index.html" style="color: var(--accent); margin-left: 12px; text-decoration: underline;">Back to Portfolio &rarr;</a></p>
-            </div>
-        </div>
-    </footer>
-
-    <script src="script.js"></script>
     <script>
-        // Additional handler for standalone header buy button
-        document.getElementById('btn-header-buy')?.addEventListener('click', () => {
-            const modal = document.getElementById('captions-checkout-modal');
-            if (modal) modal.classList.add('active');
-        });
+        function toggleFaq(el) {
+            const answer = el.nextElementSibling;
+            if (answer.style.display === 'block') {
+                answer.style.display = 'none';
+            } else {
+                answer.style.display = 'block';
+            }
+        }
+
+        function handleOrderSubmit(e) {
+            e.preventDefault();
+            const email = document.getElementById('sp-email').value.trim();
+            const phone = document.getElementById('sp-phone').value.trim();
+
+            if (!email || !phone) return;
+
+            // Open payment drawer
+            const drawer = document.getElementById('sp-pay-drawer');
+            drawer.classList.add('active');
+
+            // Update WhatsApp link with details
+            const waMsg = encodeURIComponent(
+                `Hi Rajnish!\nI want the 100+ Premium Captions Pack (Rs 49).\nEmail: ${email}\nPhone: ${phone}\nSending payment screenshot:`
+            );
+            document.getElementById('sp-wa-link').href = `https://wa.me/918521940641?text=${waMsg}`;
+
+            // Smooth scroll to payment drawer
+            drawer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        function copyUpiId() {
+            navigator.clipboard.writeText('8521940641@ybl').then(() => {
+                showToast('UPI ID copied: 8521940641@ybl');
+            });
+        }
+
+        function copyPageLink() {
+            navigator.clipboard.writeText(window.location.href).then(() => {
+                showToast('Page link copied to clipboard!');
+            });
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('sp-toast');
+            toast.textContent = msg;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2500);
+        }
     </script>
 </body>
 </html>
