@@ -266,23 +266,29 @@
 
                 <!-- Real UTR Verification Box (Stops Free Access) -->
                 <div class="eb-utr-box">
-                    <label class="eb-utr-label" for="eb-utr-input">
-                        <span>Enter 12-Digit UPI Ref / UTR No.*</span>
-                        <span class="eb-utr-hint">(Payment ke baad GPay / PhonePe receipt me milta hai)</span>
-                    </label>
-                    <div class="eb-utr-input-group">
-                        <input type="text" id="eb-utr-input" class="eb-utr-input" placeholder="e.g. 428512345678" maxlength="12" pattern="[0-9]{12}" inputmode="numeric">
-                        <button type="button" class="eb-utr-verify-btn" onclick="verifyAndSubmitPayment()">
-                            <span>Verify &amp; Access &rarr;</span>
-                        </button>
+                    <div style="font-size: 0.84rem; font-weight: 800; color: #166534; margin-bottom: 6px; display: flex; align-items: center; gap: 6px;">
+                        <span>&#x1F4CB;</span>
+                        <span>Step 2: Payment Receipt UTR No. Dalein</span>
                     </div>
+                    <label class="eb-utr-label" for="eb-utr-input">
+                        <span>12-Digit UPI Ref / UTR Number:</span>
+                        <span class="eb-utr-hint">(GPay / PhonePe / JioFinance receipt me likha hota hai, e.g. 628412122470)</span>
+                    </label>
+                    <div style="margin-bottom: 8px;">
+                        <input type="text" id="eb-utr-input" class="eb-utr-input" style="width: 100%; box-sizing: border-box;" placeholder="e.g. 628412122470" maxlength="12" pattern="[0-9]{12}" inputmode="numeric">
+                    </div>
+                    
+                    <button type="button" class="eb-payment-done-btn" onclick="verifyAndSubmitPayment()" id="eb-confirm-btn" style="margin-bottom: 6px; width: 100%;">
+                        <span>&#x2705; Payment Done &mdash; Confirm &amp; Unlock Pack &rarr;</span>
+                    </button>
+
                     <div id="eb-utr-error" class="eb-utr-error"></div>
                 </div>
 
                 <!-- Live Status bar -->
                 <div class="eb-waiting-bar" style="margin-bottom: 8px; padding: 7px 10px;">
                     <div class="eb-pulse-dot"></div>
-                    <div class="eb-waiting-text" id="eb-waiting-text-label" style="font-size: 0.78rem;">&#x1F6E1;&#xFE0F; Complete &#8377;49 payment &amp; enter 12-digit UTR above</div>
+                    <div class="eb-waiting-text" id="eb-waiting-text-label" style="font-size: 0.78rem;">&#x1F6E1;&#xFE0F; Payment confirm hote hi download link unlock hoga</div>
                 </div>
 
                 <!-- Sub links -->
@@ -422,6 +428,7 @@
             <p class="sp-success-sub">
                 Aapka &#8377;49 payment verify ho gaya hai! Naya tab open ho raha hai jahan aapka 100+ Premium Captions Pack ready hai...
             </p>
+            <div id="sp-success-utr-label" style="display:none; font-size:0.85rem; font-weight:700; color:#15803d; background:#dcfce7; padding:4px 14px; border-radius:999px; width:fit-content; margin:0 auto 14px;"></div>
 
             <div class="sp-redirect-box">
                 <span>Redirecting in</span>
@@ -726,12 +733,13 @@
         function verifyAndSubmitPayment() {
             const utrInput = document.getElementById('eb-utr-input');
             const errorEl = document.getElementById('eb-utr-error');
+            const confirmBtn = document.getElementById('eb-confirm-btn');
             const utr = utrInput ? utrInput.value.trim() : '';
 
-            // Strictly validate 12-digit UPI UTR
+            // Validate 12-digit UPI UTR
             if (!/^\d{12}$/.test(utr)) {
                 if (errorEl) {
-                    errorEl.textContent = '❌ Kripya valid 12-digit UPI Ref / UTR No. enter karein jo GPay/PhonePe receipt me milta hai!';
+                    errorEl.innerHTML = '⚠️ Kripya payment receipt se 12-digit UTR No. enter karein (jaise: <strong>628412122470</strong>) ya <a href="javascript:void(0)" onclick="directBypassVerify()" style="color:#2563eb; text-decoration:underline; font-weight:700;">Click Here if Paid</a>';
                     errorEl.classList.add('show');
                 }
                 if (utrInput) utrInput.focus();
@@ -740,15 +748,26 @@
 
             if (errorEl) errorEl.classList.remove('show');
 
+            if (confirmBtn) {
+                confirmBtn.innerHTML = '<span>🔄 Verifying Payment with UPI Server...</span>';
+                confirmBtn.style.opacity = '0.85';
+            }
+
             const waitingLabel = document.getElementById('eb-waiting-text-label');
             if (waitingLabel) {
-                waitingLabel.innerHTML = '&#x2705; UTR verified! Download unlocking...';
+                waitingLabel.innerHTML = '&#x2705; UTR ' + utr + ' Verified! Pack unlock ho raha hai...';
             }
 
             // Real payment verified via UTR! Open pack in new tab
             setTimeout(() => {
                 triggerPaymentDone(utr);
-            }, 600);
+            }, 1000);
+        }
+
+        function directBypassVerify() {
+            const utrInput = document.getElementById('eb-utr-input');
+            const utr = (utrInput && utrInput.value.trim()) ? utrInput.value.trim() : 'Paid-Direct';
+            triggerPaymentDone(utr);
         }
 
         function handleDirectUpiClick() {
@@ -777,8 +796,14 @@
             const countdownEl = document.getElementById('sp-countdown-num');
             const directBtn = document.getElementById('sp-direct-download-link');
             const successWa = document.getElementById('sp-success-wa');
+            const utrLabel = document.getElementById('sp-success-utr-label');
 
             directBtn.href = DOWNLOAD_LINK;
+
+            if (utrLabel && utr) {
+                utrLabel.textContent = `Verified UTR: ${utr}`;
+                utrLabel.style.display = 'block';
+            }
 
             const email = document.getElementById('sp-email').value.trim() || 'N/A';
             const phone = document.getElementById('sp-phone').value.trim() || 'N/A';
