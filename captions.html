@@ -681,33 +681,10 @@
             }
         }
 
-        let autoDetectTimer = null;
-        let qrOpenTimestamp = 0;
-
-        function startAutoDetection() {
-            if (autoDetectTimer) clearTimeout(autoDetectTimer);
-            qrOpenTimestamp = Date.now();
-
-            // After 18-20 seconds of scanning the QR code, automatically detect & verify payment!
-            autoDetectTimer = setTimeout(() => {
-                const modal = document.getElementById('eb-payment-modal');
-                if (modal && modal.classList.contains('active') && !hasPaidOrRedirected) {
-                    processSuccessfulPayment('QR-Auto-Verified');
-                }
-            }, 19000);
-        }
-
-        function stopAutoDetection() {
-            if (autoDetectTimer) {
-                clearTimeout(autoDetectTimer);
-                autoDetectTimer = null;
-            }
-        }
-
-        // Tap or click on "Waiting for payment..." or QR code immediately triggers payment check
+        // Real manual confirmation trigger (No fake automatic timers!)
         function triggerManualVerify() {
             if (hasPaidOrRedirected) return;
-            processSuccessfulPayment('Instant-QR-Payment');
+            processSuccessfulPayment('Manual-User-Confirm');
         }
 
         function processSuccessfulPayment(source) {
@@ -732,17 +709,6 @@
             }, 1200);
         }
 
-        // Detect when user returns from UPI App (GPay/PhonePe/Paytm) on mobile
-        document.addEventListener('visibilitychange', () => {
-            if (!document.hidden && qrOpenTimestamp > 0 && !hasPaidOrRedirected) {
-                const elapsed = Date.now() - qrOpenTimestamp;
-                const modal = document.getElementById('eb-payment-modal');
-                if (modal && modal.classList.contains('active') && elapsed > 5000) {
-                    processSuccessfulPayment('App-Return-Verified');
-                }
-            }
-        });
-
         function openPaymentModal() {
             hasPaidOrRedirected = false;
             const modal = document.getElementById('eb-payment-modal');
@@ -762,9 +728,6 @@
 
             // Start countdown
             startTimer();
-
-            // Start smart auto-detection
-            startAutoDetection();
         }
 
         function closePaymentModal() {
@@ -772,7 +735,6 @@
             modal.classList.remove('active');
             document.body.style.overflow = '';
             if (timerInterval) clearInterval(timerInterval);
-            stopAutoDetection();
         }
 
         function handleOverlayClick(e) {
