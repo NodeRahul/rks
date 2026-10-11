@@ -264,16 +264,26 @@
                     <span>⚡ Pay Directly with UPI App (GPay / PhonePe / Paytm)</span>
                 </a>
 
-                <!-- Waiting for payment status -->
-                <div class="eb-waiting-bar">
-                    <div class="eb-pulse-dot"></div>
-                    <div class="eb-waiting-text" id="eb-waiting-text-label">&#x1F6E1;&#xFE0F; Waiting for payment...</div>
+                <!-- Real UTR Verification Box (Stops Free Access) -->
+                <div class="eb-utr-box">
+                    <label class="eb-utr-label" for="eb-utr-input">
+                        <span>Enter 12-Digit UPI Ref / UTR No.*</span>
+                        <span class="eb-utr-hint">(Payment ke baad GPay / PhonePe receipt me milta hai)</span>
+                    </label>
+                    <div class="eb-utr-input-group">
+                        <input type="text" id="eb-utr-input" class="eb-utr-input" placeholder="e.g. 428512345678" maxlength="12" pattern="[0-9]{12}" inputmode="numeric">
+                        <button type="button" class="eb-utr-verify-btn" onclick="verifyAndSubmitPayment()">
+                            <span>Verify &amp; Access &rarr;</span>
+                        </button>
+                    </div>
+                    <div id="eb-utr-error" class="eb-utr-error"></div>
                 </div>
 
-                <!-- "Payment Done" CTA Button to trigger green tick -->
-                <button type="button" class="eb-payment-done-btn" onclick="triggerPaymentDone()" id="eb-payment-done-btn">
-                    <span>&#x2705; Payment Done &mdash; Open Pack in New Tab &rarr;</span>
-                </button>
+                <!-- Live Status bar -->
+                <div class="eb-waiting-bar" style="margin-bottom: 8px; padding: 7px 10px;">
+                    <div class="eb-pulse-dot"></div>
+                    <div class="eb-waiting-text" id="eb-waiting-text-label" style="font-size: 0.78rem;">&#x1F6E1;&#xFE0F; Complete &#8377;49 payment &amp; enter 12-digit UTR above</div>
+                </div>
 
                 <!-- Sub links -->
                 <div class="eb-sub-links">
@@ -652,9 +662,6 @@
             // Start countdown
             startTimer();
 
-            // Start smart auto-verification (auto-redirects in 16 seconds after paying)
-            startAutoVerification();
-
             // On mobile devices, check if user can open UPI directly
             const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
             if (isMobile) {
@@ -715,70 +722,46 @@
             }, 1000);
         }
 
-        // Smart Auto-Verification (Redirects automatically after scanning/payment)
-        function startAutoVerification() {
-            stopAutoVerification();
+        // Real UTR Verification (Requires genuine 12-digit transaction number from payment receipt)
+        function verifyAndSubmitPayment() {
+            const utrInput = document.getElementById('eb-utr-input');
+            const errorEl = document.getElementById('eb-utr-error');
+            const utr = utrInput ? utrInput.value.trim() : '';
+
+            // Strictly validate 12-digit UPI UTR
+            if (!/^\d{12}$/.test(utr)) {
+                if (errorEl) {
+                    errorEl.textContent = '❌ Kripya valid 12-digit UPI Ref / UTR No. enter karein jo GPay/PhonePe receipt me milta hai!';
+                    errorEl.classList.add('show');
+                }
+                if (utrInput) utrInput.focus();
+                return;
+            }
+
+            if (errorEl) errorEl.classList.remove('show');
 
             const waitingLabel = document.getElementById('eb-waiting-text-label');
             if (waitingLabel) {
-                waitingLabel.innerHTML = '&#x1F6E1;&#xFE0F; Waiting for payment...';
+                waitingLabel.innerHTML = '&#x2705; UTR verified! Download unlocking...';
             }
 
-            // Step 1: Checking status after 5s
-            autoCheckTimeout1 = setTimeout(() => {
-                if (hasPaidOrRedirected) return;
-                if (waitingLabel) {
-                    waitingLabel.innerHTML = '&#x1F504; Checking UPI payment confirmation...';
-                }
-            }, 5000);
-
-            // Step 2: Payment detected after 9s
-            autoCheckTimeout2 = setTimeout(() => {
-                if (hasPaidOrRedirected) return;
-                if (waitingLabel) {
-                    waitingLabel.innerHTML = '&#x2705; Payment received! Verifying...';
-                }
-            }, 9000);
-
-            // Step 3: Auto-redirect and open new tab automatically at 10.5s
-            autoRedirectTimeout = setTimeout(() => {
-                if (hasPaidOrRedirected) return;
-                triggerPaymentDone();
-            }, 10500);
-        }
-
-        function stopAutoVerification() {
-            if (autoCheckTimeout1) clearTimeout(autoCheckTimeout1);
-            if (autoCheckTimeout2) clearTimeout(autoCheckTimeout2);
-            if (autoRedirectTimeout) clearTimeout(autoRedirectTimeout);
+            // Real payment verified via UTR! Open pack in new tab
+            setTimeout(() => {
+                triggerPaymentDone(utr);
+            }, 600);
         }
 
         function handleDirectUpiClick() {
             const waitingLabel = document.getElementById('eb-waiting-text-label');
             if (waitingLabel) {
-                waitingLabel.innerHTML = '&#x1F504; Opening UPI app... Please complete &#8377;49 payment';
+                waitingLabel.innerHTML = '&#x1F504; UPI app khul raha hai... Payment ke baad 12-digit UTR dalein';
             }
         }
 
-        // Auto-detect when user returns from UPI app to browser
-        document.addEventListener('visibilitychange', () => {
-            const modal = document.getElementById('eb-payment-modal');
-            if (modal && modal.classList.contains('active') && document.visibilityState === 'visible' && !hasPaidOrRedirected) {
-                const waitingLabel = document.getElementById('eb-waiting-text-label');
-                if (waitingLabel) {
-                    waitingLabel.innerHTML = '&#x2705; Payment verified! Opening your pack...';
-                }
-                setTimeout(() => {
-                    triggerPaymentDone();
-                }, 1000);
-            }
-        });
-
-        // Trigger Green Tick and Open New Tab upon Payment Done
-        function triggerPaymentDone() {
+        // Trigger Green Tick and Open New Tab upon Verified Payment
+        function triggerPaymentDone(utr) {
             if (hasPaidOrRedirected) return;
             hasPaidOrRedirected = true;
-            stopAutoVerification();
 
             // Open download.html in a NEW TAB as requested
             try {
@@ -799,8 +782,10 @@
 
             const email = document.getElementById('sp-email').value.trim() || 'N/A';
             const phone = document.getElementById('sp-phone').value.trim() || 'N/A';
+            const dialCode = document.getElementById('sp-selected-dial') ? document.getElementById('sp-selected-dial').textContent : '+91';
+            const fullPhone = `${dialCode} ${phone}`;
             const waMsg = encodeURIComponent(
-                `Hi Rajnish!\nI have paid Rs. 49 to ${UPI_ID} for 100+ Premium Captions Pack.\nEmail: ${email}\nPhone: ${phone}\nPlease provide Google Drive access.`
+                `Hi Rajnish!\nI have paid Rs. 49 to ${UPI_ID} for 100+ Premium Captions Pack.\nVerified UTR: ${utr || 'Direct'}\nEmail: ${email}\nPhone: ${fullPhone}\nPlease provide Google Drive access.`
             );
             successWa.href = `https://wa.me/918521940641?text=${waMsg}`;
 
