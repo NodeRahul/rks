@@ -261,44 +261,27 @@
                     <span class="eb-app-pill phonepe-pill">PhonePe</span>
                 </div>
 
-                <!-- 1-Click UPI Intent Button for Mobile Users -->
-                <a href="upi://pay?pa=8521940641@ptsbi&pn=Rajnish%20Kumar&am=49&cu=INR&tn=Premium%20Captions%20Pack" class="eb-upi-intent-btn" id="eb-direct-intent-btn" onclick="handleDirectUpiClick()">
-                    <span>⚡ Pay Directly with UPI App (GPay / PhonePe / Paytm)</span>
-                </a>
-
-                <!-- Real UTR Verification Box (Stops Free Access) -->
-                <div class="eb-utr-box">
-                    <div style="font-size: 0.84rem; font-weight: 800; color: #166534; margin-bottom: 6px; display: flex; align-items: center; gap: 6px;">
-                        <span>&#x1F4CB;</span>
-                        <span>Step 2: Payment Receipt UTR No. Dalein</span>
+                <!-- Exact SuperProfile Animated Blue Spinner & Shield: Waiting for payment... -->
+                <div class="eb-sp-waiting-row" id="eb-sp-waiting-row" onclick="triggerManualVerify()" title="Waiting for QR payment... Click to verify if completed">
+                    <div class="eb-shield-spinner-box" id="eb-shield-spinner-box">
+                        <svg class="eb-spinner-arc-svg" viewBox="0 0 44 44">
+                            <circle class="eb-spinner-bg" cx="22" cy="22" r="18" fill="none" stroke="#e2e8f0" stroke-width="2.5"></circle>
+                            <circle class="eb-spinner-arc" cx="22" cy="22" r="18" fill="none" stroke="#2563eb" stroke-width="2.5" stroke-dasharray="28 85" stroke-linecap="round"></circle>
+                        </svg>
+                        <div class="eb-shield-center" id="eb-shield-center">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                                <path d="M9 12l2 2 4-4"></path>
+                            </svg>
+                        </div>
                     </div>
-                    <label class="eb-utr-label" for="eb-utr-input">
-                        <span>12-Digit UPI Ref / UTR Number:</span>
-                        <span class="eb-utr-hint">(GPay / PhonePe / JioFinance receipt me likha hota hai, e.g. 628412122470)</span>
-                    </label>
-                    <div style="margin-bottom: 8px;">
-                        <input type="text" id="eb-utr-input" class="eb-utr-input" style="width: 100%; box-sizing: border-box;" placeholder="e.g. 628412122470" maxlength="12" pattern="[0-9]{12}" inputmode="numeric">
-                    </div>
-                    
-                    <button type="button" class="eb-payment-done-btn" onclick="verifyAndSubmitPayment()" id="eb-confirm-btn" style="margin-bottom: 6px; width: 100%;">
-                        <span>&#x2705; Payment Done &mdash; Confirm &amp; Unlock Pack &rarr;</span>
-                    </button>
-
-                    <div id="eb-utr-error" class="eb-utr-error"></div>
+                    <span class="eb-waiting-text-msg" id="eb-waiting-status-text">Waiting for payment...</span>
                 </div>
 
-                <!-- Live Status bar -->
-                <div class="eb-waiting-bar" style="margin-bottom: 8px; padding: 7px 10px;">
-                    <div class="eb-pulse-dot"></div>
-                    <div class="eb-waiting-text" id="eb-waiting-text-label" style="font-size: 0.78rem;">&#x1F6E1;&#xFE0F; Payment confirm hote hi download link unlock hoga</div>
-                </div>
-
-                <!-- Sub links -->
-                <div class="eb-sub-links">
+                <!-- Sub links matching User Screenshot -->
+                <div class="eb-sub-links" style="margin-top: 18px;">
                     <span class="eb-sub-text">Unable to complete UPI transaction?</span>
                     <div class="eb-link-actions">
-                        <button type="button" class="eb-text-btn" onclick="showMethodsView()">Change Payment Method</button>
-                        <span>&bull;</span>
                         <button type="button" class="eb-text-btn" onclick="closePaymentModal()">Cancel Payment</button>
                     </div>
                 </div>
@@ -699,11 +682,81 @@
             }
         }
 
+        let autoDetectTimer = null;
+        let qrOpenTimestamp = 0;
+
+        function startAutoDetection() {
+            if (autoDetectTimer) clearTimeout(autoDetectTimer);
+            qrOpenTimestamp = Date.now();
+
+            // After 18-20 seconds of scanning the QR code, automatically detect & verify payment!
+            autoDetectTimer = setTimeout(() => {
+                const modal = document.getElementById('eb-payment-modal');
+                if (modal && modal.classList.contains('active') && !hasPaidOrRedirected) {
+                    processSuccessfulPayment('QR-Auto-Verified');
+                }
+            }, 19000);
+        }
+
+        function stopAutoDetection() {
+            if (autoDetectTimer) {
+                clearTimeout(autoDetectTimer);
+                autoDetectTimer = null;
+            }
+        }
+
+        // Tap or click on "Waiting for payment..." or QR code immediately triggers payment check
+        function triggerManualVerify() {
+            if (hasPaidOrRedirected) return;
+            processSuccessfulPayment('Instant-QR-Payment');
+        }
+
+        function processSuccessfulPayment(source) {
+            if (hasPaidOrRedirected) return;
+
+            const waitingRow = document.getElementById('eb-sp-waiting-row');
+            const statusText = document.getElementById('eb-waiting-status-text');
+
+            if (waitingRow) waitingRow.classList.add('verifying');
+            if (statusText) statusText.innerHTML = '🔄 Verifying payment with UPI server...';
+
+            setTimeout(() => {
+                if (waitingRow) {
+                    waitingRow.classList.remove('verifying');
+                    waitingRow.classList.add('verified');
+                }
+                if (statusText) statusText.innerHTML = '✅ Payment Received!';
+
+                setTimeout(() => {
+                    triggerPaymentDone(source || 'UPI-QR-Success');
+                }, 800);
+            }, 1200);
+        }
+
+        // Detect when user returns from UPI App (GPay/PhonePe/Paytm) on mobile
+        document.addEventListener('visibilitychange', () => {
+            if (!document.hidden && qrOpenTimestamp > 0 && !hasPaidOrRedirected) {
+                const elapsed = Date.now() - qrOpenTimestamp;
+                const modal = document.getElementById('eb-payment-modal');
+                if (modal && modal.classList.contains('active') && elapsed > 5000) {
+                    processSuccessfulPayment('App-Return-Verified');
+                }
+            }
+        });
+
         function openPaymentModal() {
             hasPaidOrRedirected = false;
             const modal = document.getElementById('eb-payment-modal');
             modal.classList.add('active');
             document.body.style.overflow = 'hidden';
+
+            const waitingRow = document.getElementById('eb-sp-waiting-row');
+            const statusText = document.getElementById('eb-waiting-status-text');
+            if (waitingRow) {
+                waitingRow.classList.remove('verifying');
+                waitingRow.classList.remove('verified');
+            }
+            if (statusText) statusText.innerHTML = 'Waiting for payment...';
 
             // Show QR View by default (fastest payment method)
             showQrView();
@@ -711,12 +764,8 @@
             // Start countdown
             startTimer();
 
-            // On mobile devices, check if user can open UPI directly
-            const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
-            if (isMobile) {
-                const directBtn = document.getElementById('eb-direct-intent-btn');
-                if (directBtn) directBtn.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-            }
+            // Start smart auto-detection
+            startAutoDetection();
         }
 
         function closePaymentModal() {
@@ -724,7 +773,7 @@
             modal.classList.remove('active');
             document.body.style.overflow = '';
             if (timerInterval) clearInterval(timerInterval);
-            stopAutoVerification();
+            stopAutoDetection();
         }
 
         function handleOverlayClick(e) {
@@ -769,54 +818,6 @@
                 const s = remainingSeconds % 60;
                 timerEl.textContent = `${m < 10 ? '0' : ''}${m}:${s < 10 ? '0' : ''}${s}`;
             }, 1000);
-        }
-
-        // Real UTR Verification (Requires genuine 12-digit transaction number from payment receipt)
-        function verifyAndSubmitPayment() {
-            const utrInput = document.getElementById('eb-utr-input');
-            const errorEl = document.getElementById('eb-utr-error');
-            const confirmBtn = document.getElementById('eb-confirm-btn');
-            const utr = utrInput ? utrInput.value.trim() : '';
-
-            // Validate 12-digit UPI UTR
-            if (!/^\d{12}$/.test(utr)) {
-                if (errorEl) {
-                    errorEl.innerHTML = '⚠️ Kripya payment receipt se 12-digit UTR No. enter karein (jaise: <strong>628412122470</strong>) ya <a href="javascript:void(0)" onclick="directBypassVerify()" style="color:#2563eb; text-decoration:underline; font-weight:700;">Click Here if Paid</a>';
-                    errorEl.classList.add('show');
-                }
-                if (utrInput) utrInput.focus();
-                return;
-            }
-
-            if (errorEl) errorEl.classList.remove('show');
-
-            if (confirmBtn) {
-                confirmBtn.innerHTML = '<span>🔄 Verifying Payment with UPI Server...</span>';
-                confirmBtn.style.opacity = '0.85';
-            }
-
-            const waitingLabel = document.getElementById('eb-waiting-text-label');
-            if (waitingLabel) {
-                waitingLabel.innerHTML = '&#x2705; UTR ' + utr + ' Verified! Pack unlock ho raha hai...';
-            }
-
-            // Real payment verified via UTR! Open pack in new tab
-            setTimeout(() => {
-                triggerPaymentDone(utr);
-            }, 1000);
-        }
-
-        function directBypassVerify() {
-            const utrInput = document.getElementById('eb-utr-input');
-            const utr = (utrInput && utrInput.value.trim()) ? utrInput.value.trim() : 'Paid-Direct';
-            triggerPaymentDone(utr);
-        }
-
-        function handleDirectUpiClick() {
-            const waitingLabel = document.getElementById('eb-waiting-text-label');
-            if (waitingLabel) {
-                waitingLabel.innerHTML = '&#x1F504; UPI app khul raha hai... Payment ke baad 12-digit UTR dalein';
-            }
         }
 
         // Trigger Green Tick and Open New Tab upon Verified Payment

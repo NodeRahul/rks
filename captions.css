@@ -1281,176 +1281,81 @@ body.superprofile-theme::after {
 .paytm-pill { color: #0284c7; }
 .bhim-pill { color: #059669; }
 
-/* Direct Intent Button */
-.eb-upi-intent-btn {
-    display: block;
-    width: 100%;
-    background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
-    color: #ffffff;
-    text-align: center;
-    text-decoration: none;
-    font-size: 0.9rem;
-    font-weight: 700;
-    padding: 11px;
-    border-radius: 10px;
-    margin-bottom: 8px;
-    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
-    transition: all 0.2s ease;
-}
-
-.eb-upi-intent-btn:hover {
-    background: linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%);
-    transform: translateY(-1px);
-}
-
-/* Waiting indicator */
-.eb-waiting-bar {
+/* Exact SuperProfile Blue Spinner & Shield Status: Waiting for payment... (Screenshot 1:1 match) */
+.eb-sp-waiting-row {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
-    padding: 9px 12px;
-    background: #f0fdf4;
-    border: 1px solid #bbf7d0;
-    border-radius: 10px;
-    margin-bottom: 8px;
-}
-
-.eb-waiting-text {
-    font-size: 0.82rem;
-    font-weight: 700;
-    color: #166534;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-}
-
-.eb-pulse-dot {
-    width: 8px;
-    height: 8px;
-    background: #16a34a;
-    border-radius: 50%;
-    box-shadow: 0 0 10px #16a34a;
-    animation: ebDotPulse 1.4s infinite;
-}
-
-@keyframes ebDotPulse {
-    0%, 100% { opacity: 0.4; transform: scale(0.9); }
-    50% { opacity: 1; transform: scale(1.2); }
-}
-
-.eb-payment-done-btn {
-    width: 100%;
-    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-    color: #ffffff;
-    border: none;
-    padding: 13px 16px;
-    border-radius: 10px;
-    font-size: 0.96rem;
-    font-weight: 800;
+    gap: 12px;
+    margin: 16px auto 14px;
+    padding: 10px 20px;
+    border-radius: 999px;
+    width: fit-content;
+    background: transparent;
     cursor: pointer;
-    box-shadow: 0 4px 16px rgba(16, 185, 129, 0.45);
-    transition: all 0.2s ease;
-    margin-bottom: 8px;
+    transition: all 0.25s ease;
+    user-select: none;
+}
+
+.eb-sp-waiting-row:hover {
+    background: #f1f5f9;
+}
+
+.eb-shield-spinner-box {
+    position: relative;
+    width: 36px;
+    height: 36px;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
-    animation: ebDonePulse 2s infinite;
 }
 
-@keyframes ebDonePulse {
-    0% { transform: scale(1); box-shadow: 0 4px 16px rgba(16, 185, 129, 0.45); }
-    50% { transform: scale(1.02); box-shadow: 0 6px 22px rgba(16, 185, 129, 0.65); }
-    100% { transform: scale(1); box-shadow: 0 4px 16px rgba(16, 185, 129, 0.45); }
+.eb-spinner-arc-svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 36px;
+    height: 36px;
+    animation: ebShieldSpin 1.25s linear infinite;
 }
 
-.eb-payment-done-btn:hover {
-    background: linear-gradient(135deg, #059669 0%, #047857 100%);
-    transform: translateY(-2px);
+@keyframes ebShieldSpin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
 
-/* 12-Digit Real UTR Verification Box */
-.eb-utr-box {
-    background: #f8fafc;
-    border: 1.5px solid #cbd5e1;
-    border-radius: 12px;
-    padding: 12px 14px;
-    margin-bottom: 10px;
-    text-align: left;
-}
-
-.eb-utr-label {
+.eb-shield-center {
+    position: relative;
+    z-index: 2;
     display: flex;
-    flex-direction: column;
-    font-size: 0.8rem;
-    font-weight: 700;
-    color: #1e293b;
-    margin-bottom: 8px;
-    gap: 2px;
+    align-items: center;
+    justify-content: center;
 }
 
-.eb-utr-hint {
-    font-size: 0.72rem;
+.eb-waiting-text-msg {
+    font-size: 0.95rem;
     font-weight: 500;
-    color: #64748b;
+    color: #475569;
+    letter-spacing: -0.01em;
 }
 
-.eb-utr-input-group {
-    display: flex;
-    gap: 8px;
-}
-
-.eb-utr-input {
-    flex: 1;
-    border: 1.5px solid #cbd5e1;
-    border-radius: 8px;
-    padding: 10px 12px;
-    font-size: 0.92rem;
-    font-family: inherit;
-    font-weight: 700;
-    letter-spacing: 1.2px;
-    color: #0f172a;
-    outline: none;
-    background: #ffffff;
-    transition: all 0.2s ease;
-}
-
-.eb-utr-input:focus {
-    border-color: #2563eb;
-    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
-}
-
-.eb-utr-verify-btn {
-    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-    color: #ffffff;
-    border: none;
-    border-radius: 8px;
-    padding: 10px 16px;
-    font-size: 0.88rem;
-    font-weight: 800;
-    cursor: pointer;
-    white-space: nowrap;
-    transition: all 0.2s ease;
-    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.35);
-}
-
-.eb-utr-verify-btn:hover {
-    background: linear-gradient(135deg, #059669 0%, #047857 100%);
-    transform: translateY(-1px);
-}
-
-.eb-utr-error {
-    font-size: 0.74rem;
-    color: #ef4444;
+/* Verified / Processing State */
+.eb-sp-waiting-row.verifying .eb-waiting-text-msg {
+    color: #2563eb;
     font-weight: 600;
-    margin-top: 6px;
-    display: none;
-    line-height: 1.35;
 }
 
-.eb-utr-error.show {
-    display: block;
+.eb-sp-waiting-row.verified .eb-spinner-arc-svg {
+    display: none;
+}
+
+.eb-sp-waiting-row.verified .eb-shield-center svg {
+    stroke: #16a34a;
+}
+
+.eb-sp-waiting-row.verified .eb-waiting-text-msg {
+    color: #16a34a;
+    font-weight: 700;
 }
 
 .eb-sub-links {
