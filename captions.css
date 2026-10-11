@@ -368,6 +368,32 @@ body.superprofile-theme::after {
     box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.2);
 }
 
+/* SuperProfile Validation Error States */
+.sp-input.is-invalid,
+.sp-phone-field-wrapper.is-invalid {
+    border-color: #ef4444 !important;
+    background-color: #fff !important;
+}
+
+.sp-field-error {
+    display: none;
+    font-size: 0.74rem;
+    font-weight: 500;
+    color: #ef4444;
+    margin-top: 5px;
+    padding-left: 2px;
+}
+
+.sp-field-error.show {
+    display: block;
+    animation: spErrorFade 0.15s ease-out;
+}
+
+@keyframes spErrorFade {
+    from { opacity: 0; transform: translateY(-3px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
 .sp-country-trigger {
     background: transparent;
     border: none;

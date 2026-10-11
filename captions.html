@@ -138,9 +138,10 @@
                         Access to this purchase will be sent to this email
                     </p>
 
-                    <form id="sp-order-form" onsubmit="handleOrderSubmit(event)">
+                    <form id="sp-order-form" novalidate onsubmit="handleOrderSubmit(event)">
                         <div class="sp-form-group">
-                            <input type="email" id="sp-email" class="sp-input" required placeholder="Email Address">
+                            <input type="email" id="sp-email" class="sp-input" placeholder="Email Address" oninput="clearError('sp-email')">
+                            <div class="sp-field-error" id="sp-email-error">This field is mandatory</div>
                         </div>
 
                         <div class="sp-form-group" style="position: relative;">
@@ -149,8 +150,9 @@
                                     <span id="sp-selected-dial">+91</span>
                                     <span class="sp-country-chevron" id="sp-country-chevron">&#9662;</span>
                                 </button>
-                                <input type="tel" id="sp-phone" class="sp-phone-input" required placeholder="Phone number *" pattern="[0-9]{6,15}" title="Please enter valid phone number">
+                                <input type="tel" id="sp-phone" class="sp-phone-input" placeholder="Phone number *" oninput="clearError('sp-phone')" pattern="[0-9]{6,15}">
                             </div>
+                            <div class="sp-field-error" id="sp-phone-error">This field is mandatory</div>
 
                             <!-- Country Dropdown Popover matching Screenshot -->
                             <div class="sp-country-dropdown" id="sp-country-dropdown">
@@ -646,15 +648,55 @@
             }
         }
 
-        // Form Submit: Open Easebuzz Modal
+        // Form Submit: Open Easebuzz Modal with SuperProfile Error Validation
         function handleOrderSubmit(e) {
             e.preventDefault();
-            const email = document.getElementById('sp-email').value.trim();
-            const phone = document.getElementById('sp-phone').value.trim();
+            const emailInput = document.getElementById('sp-email');
+            const phoneInput = document.getElementById('sp-phone');
+            const phoneWrapper = document.getElementById('sp-phone-field-wrapper');
+            const emailError = document.getElementById('sp-email-error');
+            const phoneError = document.getElementById('sp-phone-error');
 
-            if (!email || !phone) return;
+            const email = emailInput ? emailInput.value.trim() : '';
+            const phone = phoneInput ? phoneInput.value.trim() : '';
+
+            let isValid = true;
+
+            if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                if (emailInput) emailInput.classList.add('is-invalid');
+                if (emailError) emailError.classList.add('show');
+                isValid = false;
+            } else {
+                if (emailInput) emailInput.classList.remove('is-invalid');
+                if (emailError) emailError.classList.remove('show');
+            }
+
+            if (!phone || phone.length < 6) {
+                if (phoneWrapper) phoneWrapper.classList.add('is-invalid');
+                if (phoneError) phoneError.classList.add('show');
+                isValid = false;
+            } else {
+                if (phoneWrapper) phoneWrapper.classList.remove('is-invalid');
+                if (phoneError) phoneError.classList.remove('show');
+            }
+
+            if (!isValid) return;
 
             openPaymentModal();
+        }
+
+        function clearError(field) {
+            if (field === 'sp-email') {
+                const el = document.getElementById('sp-email');
+                const err = document.getElementById('sp-email-error');
+                if (el) el.classList.remove('is-invalid');
+                if (err) err.classList.remove('show');
+            } else if (field === 'sp-phone') {
+                const wrap = document.getElementById('sp-phone-field-wrapper');
+                const err = document.getElementById('sp-phone-error');
+                if (wrap) wrap.classList.remove('is-invalid');
+                if (err) err.classList.remove('show');
+            }
         }
 
         function openPaymentModal() {
