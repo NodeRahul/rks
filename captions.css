@@ -866,3 +866,493 @@ body.superprofile-theme::after {
         display: none;
     }
 }
+
+/* ==========================================================================
+   EASEBUZZ / COSMOFEED PAYMENT GATEWAY MODAL STYLES (SCREENSHOTS 2 & 3)
+   ========================================================================== */
+.eb-modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 999990;
+    background: rgba(15, 23, 42, 0.78);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+}
+
+.eb-modal-overlay.active {
+    display: flex;
+    animation: ebModalFade 0.25s ease;
+}
+
+@keyframes ebModalFade {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.eb-modal-container {
+    width: 100%;
+    max-width: 440px;
+    background: #ffffff;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.45);
+    animation: ebModalSlide 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    max-height: 94vh;
+    overflow-y: auto;
+}
+
+@keyframes ebModalSlide {
+    from { transform: scale(0.92) translateY(12px); opacity: 0; }
+    to { transform: scale(1) translateY(0); opacity: 1; }
+}
+
+/* Top bar with cancel and powered by */
+.eb-gateway-topbar {
+    background: #1e293b;
+    padding: 12px 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #cbd5e1;
+}
+
+.eb-cancel-btn {
+    background: transparent;
+    border: none;
+    color: #e2e8f0;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 8px;
+    border-radius: 6px;
+    transition: background 0.2s;
+}
+
+.eb-cancel-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+}
+
+.eb-gateway-powered {
+    font-size: 0.78rem;
+    color: #94a3b8;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.eb-brand-easebuzz {
+    font-weight: 800;
+    color: #38bdf8;
+    letter-spacing: 0.5px;
+}
+
+/* Timer pill bar */
+.eb-timer-banner {
+    background: #4338ca;
+    color: #ffffff;
+    text-align: center;
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 6px 12px;
+    letter-spacing: 0.3px;
+}
+
+.eb-timer-banner strong {
+    color: #fde047;
+    margin-left: 4px;
+}
+
+/* Merchant Blue Banner */
+.eb-merchant-bar {
+    background: #3730a3;
+    padding: 14px 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #ffffff;
+}
+
+.eb-merchant-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.eb-merchant-logo {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+.eb-merchant-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.eb-merchant-url {
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: #ffffff;
+}
+
+.eb-order-id {
+    font-size: 0.75rem;
+    color: #c7d2fe;
+}
+
+.eb-lang-dropdown {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #e0e7ff;
+    cursor: pointer;
+}
+
+/* Content views */
+.eb-view-content {
+    padding: 20px 22px 24px;
+}
+
+/* RuPay UPI Banner (Screenshot 3) */
+.eb-rupay-banner {
+    background: #f1f5f9;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 10px 14px;
+    font-size: 0.82rem;
+    color: #334155;
+    line-height: 1.4;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 18px;
+}
+
+.eb-rupay-icon {
+    font-size: 1.2rem;
+}
+
+/* Centered QR Box */
+.eb-qr-box {
+    text-align: center;
+    margin: 10px auto 16px;
+    padding: 12px;
+    background: #ffffff;
+    border: 1.5px solid #e2e8f0;
+    border-radius: 16px;
+    display: block;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+}
+
+.eb-qr-image {
+    width: 210px;
+    height: 210px;
+    display: block;
+    margin: 0 auto;
+}
+
+.eb-qr-instruction {
+    text-align: center;
+    font-size: 0.96rem;
+    color: #1e293b;
+    margin-bottom: 14px;
+    line-height: 1.45;
+}
+
+.eb-qr-instruction strong {
+    font-size: 1.12rem;
+    color: #0f172a;
+    font-weight: 800;
+}
+
+/* UPI Icons */
+.eb-upi-icons-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 16px;
+}
+
+.eb-app-pill {
+    padding: 4px 12px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 999px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: #475569;
+}
+
+.gpay-pill { color: #1e40af; }
+.phonepe-pill { color: #6b21a8; }
+.paytm-pill { color: #0284c7; }
+.bhim-pill { color: #059669; }
+
+/* Direct Intent Button */
+.eb-upi-intent-btn {
+    display: block;
+    width: 100%;
+    background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+    color: #ffffff;
+    text-align: center;
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 700;
+    padding: 13px;
+    border-radius: 10px;
+    margin-bottom: 12px;
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+    transition: all 0.2s ease;
+}
+
+.eb-upi-intent-btn:hover {
+    background: linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%);
+    transform: translateY(-1px);
+}
+
+/* Waiting indicator */
+.eb-waiting-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 12px;
+    background: #f0fdf4;
+    border: 1px solid #bbf7d0;
+    border-radius: 12px;
+    margin-bottom: 14px;
+}
+
+.eb-waiting-text {
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: #166534;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.eb-pulse-dot {
+    width: 8px;
+    height: 8px;
+    background: #16a34a;
+    border-radius: 50%;
+    box-shadow: 0 0 10px #16a34a;
+    animation: ebDotPulse 1.4s infinite;
+}
+
+@keyframes ebDotPulse {
+    0%, 100% { opacity: 0.4; transform: scale(0.9); }
+    50% { opacity: 1; transform: scale(1.2); }
+}
+
+.eb-payment-done-btn {
+    width: 100%;
+    background: #10b981;
+    color: #ffffff;
+    border: none;
+    padding: 14px;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 800;
+    cursor: pointer;
+    box-shadow: 0 4px 14px rgba(16, 185, 129, 0.4);
+    transition: all 0.2s ease;
+    margin-bottom: 14px;
+}
+
+.eb-payment-done-btn:hover {
+    background: #059669;
+    transform: translateY(-2px);
+}
+
+.eb-sub-links {
+    text-align: center;
+}
+
+.eb-sub-text {
+    display: block;
+    font-size: 0.8rem;
+    color: #64748b;
+    margin-bottom: 6px;
+}
+
+.eb-link-actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-size: 0.82rem;
+    color: #94a3b8;
+}
+
+.eb-text-btn {
+    background: none;
+    border: none;
+    color: #2563eb;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 0.82rem;
+    text-decoration: underline;
+    padding: 0;
+}
+
+/* VIEW 2: METHODS LIST STYLES (Screenshot 2) */
+.eb-offers-row {
+    background: #fffbeb;
+    border: 1px dashed #f59e0b;
+    border-radius: 10px;
+    padding: 10px 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 18px;
+}
+
+.eb-offer-left {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.eb-offer-badge {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: #b45309;
+}
+
+.eb-offer-text {
+    font-size: 0.82rem;
+    color: #78350f;
+}
+
+.eb-offer-apply-btn {
+    background: transparent;
+    border: 1px solid #f59e0b;
+    color: #b45309;
+    font-size: 0.78rem;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.eb-methods-title {
+    font-size: 0.95rem;
+    font-weight: 800;
+    color: #1e293b;
+    margin-bottom: 12px;
+}
+
+.eb-methods-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.eb-method-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 13px 16px;
+    background: #ffffff;
+    border: 1.5px solid #e2e8f0;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.eb-method-card:hover {
+    border-color: #3b82f6;
+    background: #f8fafc;
+    transform: translateX(2px);
+}
+
+.eb-method-card.active-method {
+    border-color: #2563eb;
+    background: #eff6ff;
+}
+
+.eb-method-left {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.eb-method-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.15rem;
+}
+
+.upi-bg { background: #dbeafe; color: #1e40af; }
+.card-bg { background: #fef3c7; color: #b45309; }
+.bank-bg { background: #e0e7ff; color: #4338ca; }
+.wallet-bg { background: #fce7f3; color: #be185d; }
+
+.eb-method-name {
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: #1e293b;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.eb-offer-tag {
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: #15803d;
+    background: #dcfce7;
+    padding: 2px 7px;
+    border-radius: 999px;
+}
+
+.eb-method-sub {
+    font-size: 0.78rem;
+    color: #64748b;
+    margin-top: 2px;
+}
+
+.eb-method-arrow {
+    font-size: 1.1rem;
+    color: #94a3b8;
+}
+
+.eb-gateway-footer {
+    border-top: 1px solid #f1f5f9;
+    padding-top: 14px;
+    text-align: center;
+}
+
+.eb-gateway-footer p {
+    font-size: 0.72rem;
+    color: #94a3b8;
+    line-height: 1.4;
+    margin-bottom: 8px;
+}
+
+.eb-pci-badge {
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: #475569;
+}
