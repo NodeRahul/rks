@@ -637,6 +637,190 @@ body.superprofile-theme::after {
     background: #22c55e;
 }
 
+/* Payment Done CTA Button */
+.sp-btn-payment-done {
+    margin-top: 14px;
+    width: 100%;
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    color: #ffffff;
+    border: none;
+    border-radius: 12px;
+    padding: 15px 18px;
+    font-size: 1rem;
+    font-weight: 800;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    box-shadow: 0 4px 18px rgba(16, 185, 129, 0.45);
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.sp-btn-payment-done:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(16, 185, 129, 0.6);
+    background: linear-gradient(135deg, #059669 0%, #047857 100%);
+}
+
+.sp-btn-payment-done:active {
+    transform: translateY(0);
+}
+
+/* Fullscreen Success Overlay with Green Tick */
+.sp-success-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 999999;
+    background: rgba(10, 10, 14, 0.82);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.sp-success-modal.active {
+    display: flex;
+    animation: spFadeIn 0.3s ease;
+}
+
+.sp-success-card {
+    background: #ffffff;
+    border-radius: 28px;
+    max-width: 460px;
+    width: 100%;
+    padding: 38px 30px;
+    text-align: center;
+    box-shadow: 0 25px 70px rgba(0, 0, 0, 0.45);
+    position: relative;
+    animation: spPopIn 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Green Tick Circle & Pulse */
+.sp-checkmark-wrapper {
+    width: 96px;
+    height: 96px;
+    margin: 0 auto 20px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sp-checkmark-circle {
+    width: 86px;
+    height: 86px;
+    border-radius: 50%;
+    background: #10b981;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+    animation: spPulseGreen 1.8s infinite;
+}
+
+.sp-checkmark-svg {
+    width: 48px;
+    height: 48px;
+    stroke: #ffffff;
+    stroke-width: 3.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    fill: none;
+    stroke-dasharray: 60;
+    stroke-dashoffset: 60;
+    animation: spDrawCheck 0.7s 0.2s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+}
+
+@keyframes spDrawCheck {
+    to { stroke-dashoffset: 0; }
+}
+
+@keyframes spPulseGreen {
+    0% { transform: scale(0.96); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.65); }
+    70% { transform: scale(1); box-shadow: 0 0 0 24px rgba(16, 185, 129, 0); }
+    100% { transform: scale(0.96); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+}
+
+@keyframes spPopIn {
+    0% { transform: scale(0.88); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes spFadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+.sp-success-title {
+    font-family: var(--font-heading);
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: #111827;
+    margin-bottom: 8px;
+}
+
+.sp-success-sub {
+    font-size: 0.95rem;
+    color: #4b5563;
+    line-height: 1.5;
+    margin-bottom: 22px;
+}
+
+.sp-redirect-box {
+    background: #f0fdf4;
+    border: 1.5px solid #bbf7d0;
+    border-radius: 14px;
+    padding: 14px 18px;
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: #166534;
+}
+
+.sp-countdown-num {
+    background: #16a34a;
+    color: #ffffff;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.88rem;
+    font-weight: 800;
+}
+
+.sp-direct-access-btn {
+    width: 100%;
+    background: #f59e0b;
+    color: #111827;
+    text-decoration: none;
+    border-radius: 12px;
+    padding: 14px 20px;
+    font-size: 1rem;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    box-shadow: 0 4px 14px rgba(245, 158, 11, 0.4);
+    transition: all 0.2s ease;
+    margin-bottom: 10px;
+}
+
+.sp-direct-access-btn:hover {
+    background: #eab308;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(245, 158, 11, 0.55);
+}
+
 /* Toast Message */
 .sp-toast {
     position: fixed;
