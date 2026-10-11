@@ -263,7 +263,7 @@
 
                 <!-- "Payment Done" CTA Button to trigger green tick -->
                 <button type="button" class="eb-payment-done-btn" onclick="triggerPaymentDone()" id="eb-payment-done-btn">
-                    <span>&#x2705; Payment Complete &rarr; Download Pack</span>
+                    <span>&#x2705; Payment Done &mdash; Open Pack in New Tab &rarr;</span>
                 </button>
 
                 <!-- Sub links -->
@@ -399,19 +399,19 @@
                 </div>
             </div>
 
-            <h2 class="sp-success-title">Payment Done! 🎉</h2>
+            <h2 class="sp-success-title">Payment Done! Your Pack Is Here 🎉</h2>
             <p class="sp-success-sub">
-                Aapka payment successfully complete ho gaya hai. Abhi download & access page par redirect kiya ja raha hai...
+                Aapka &#8377;49 payment verify ho gaya hai! Naya tab open ho raha hai jahan aapka 100+ Premium Captions Pack ready hai...
             </p>
 
             <div class="sp-redirect-box">
                 <span>Redirecting in</span>
-                <span class="sp-countdown-num" id="sp-countdown-num">3</span>
+                <span class="sp-countdown-num" id="sp-countdown-num">2</span>
                 <span>seconds...</span>
             </div>
 
-            <a href="download.html" class="sp-direct-access-btn" id="sp-direct-download-link">
-                <span>📥 Direct Access Page Par Jayein (Click Here)</span>
+            <a href="download.html" target="_blank" class="sp-direct-access-btn" id="sp-direct-download-link">
+                <span>📥 Direct Access Page (Open in New Tab)</span>
                 <span>&rarr;</span>
             </a>
 
@@ -542,27 +542,27 @@
                 waitingLabel.innerHTML = '&#x1F6E1;&#xFE0F; Waiting for payment...';
             }
 
-            // Step 1: Checking status after 8s
+            // Step 1: Checking status after 5s
             autoCheckTimeout1 = setTimeout(() => {
                 if (hasPaidOrRedirected) return;
                 if (waitingLabel) {
                     waitingLabel.innerHTML = '&#x1F504; Checking UPI payment confirmation...';
                 }
-            }, 8000);
+            }, 5000);
 
-            // Step 2: Payment detected after 14s
+            // Step 2: Payment detected after 9s
             autoCheckTimeout2 = setTimeout(() => {
                 if (hasPaidOrRedirected) return;
                 if (waitingLabel) {
                     waitingLabel.innerHTML = '&#x2705; Payment received! Verifying...';
                 }
-            }, 14000);
+            }, 9000);
 
-            // Step 3: Auto-redirect automatically at 16s
+            // Step 3: Auto-redirect and open new tab automatically at 10.5s
             autoRedirectTimeout = setTimeout(() => {
                 if (hasPaidOrRedirected) return;
                 triggerPaymentDone();
-            }, 16000);
+            }, 10500);
         }
 
         function stopAutoVerification() {
@@ -584,19 +584,26 @@
             if (modal && modal.classList.contains('active') && document.visibilityState === 'visible' && !hasPaidOrRedirected) {
                 const waitingLabel = document.getElementById('eb-waiting-text-label');
                 if (waitingLabel) {
-                    waitingLabel.innerHTML = '&#x2705; Payment verified! Redirecting...';
+                    waitingLabel.innerHTML = '&#x2705; Payment verified! Opening your pack...';
                 }
                 setTimeout(() => {
                     triggerPaymentDone();
-                }, 1200);
+                }, 1000);
             }
         });
 
-        // Trigger Green Tick and Redirect upon Payment Done
+        // Trigger Green Tick and Open New Tab upon Payment Done
         function triggerPaymentDone() {
             if (hasPaidOrRedirected) return;
             hasPaidOrRedirected = true;
             stopAutoVerification();
+
+            // Open download.html in a NEW TAB as requested
+            try {
+                window.open(DOWNLOAD_LINK, '_blank');
+            } catch (e) {
+                console.log('Popup blocked; current tab will redirect');
+            }
 
             // Close easebuzz modal
             closePaymentModal();
@@ -617,7 +624,7 @@
 
             modal.classList.add('active');
 
-            let seconds = 3;
+            let seconds = 2;
             countdownEl.textContent = seconds;
 
             const countdownInterval = setInterval(() => {
