@@ -413,7 +413,6 @@
             <p class="sp-success-sub">
                 Aapka &#8377;49 payment verify ho gaya hai! Naya tab open ho raha hai jahan aapka 100+ Premium Captions Pack ready hai...
             </p>
-            <div id="sp-success-utr-label" style="display:none; font-size:0.85rem; font-weight:700; color:#15803d; background:#dcfce7; padding:4px 14px; border-radius:999px; width:fit-content; margin:0 auto 14px;"></div>
 
             <div class="sp-redirect-box">
                 <span>Redirecting in</span>
@@ -839,21 +838,15 @@
             const countdownEl = document.getElementById('sp-countdown-num');
             const directBtn = document.getElementById('sp-direct-download-link');
             const successWa = document.getElementById('sp-success-wa');
-            const utrLabel = document.getElementById('sp-success-utr-label');
 
             directBtn.href = DOWNLOAD_LINK;
-
-            if (utrLabel && utr) {
-                utrLabel.textContent = `Verified UTR: ${utr}`;
-                utrLabel.style.display = 'block';
-            }
 
             const email = document.getElementById('sp-email').value.trim() || 'N/A';
             const phone = document.getElementById('sp-phone').value.trim() || 'N/A';
             const dialCode = document.getElementById('sp-selected-dial') ? document.getElementById('sp-selected-dial').textContent : '+91';
             const fullPhone = `${dialCode} ${phone}`;
             const waMsg = encodeURIComponent(
-                `Hi Rajnish!\nI have paid Rs. 49 to ${UPI_ID} for 100+ Premium Captions Pack.\nVerified UTR: ${utr || 'Direct'}\nEmail: ${email}\nPhone: ${fullPhone}\nPlease provide Google Drive access.`
+                `Hi Rajnish!\nI have paid Rs. 49 to ${UPI_ID} for 100+ Premium Captions Pack.\nEmail: ${email}\nPhone: ${fullPhone}\nPlease provide Google Drive access.`
             );
             successWa.href = `https://wa.me/918521940641?text=${waMsg}`;
 
