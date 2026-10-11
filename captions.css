@@ -1281,7 +1281,7 @@ body.superprofile-theme::after {
 .paytm-pill { color: #0284c7; }
 .bhim-pill { color: #059669; }
 
-/* Exact SuperProfile Blue Spinner & Shield Status: Waiting for payment... (Screenshot 1:1 match) */
+/* Exact SuperProfile Blue Spinner & Shield Status: Waiting for payment... (Non-clickable) */
 .eb-sp-waiting-row {
     display: flex;
     align-items: center;
@@ -1292,13 +1292,9 @@ body.superprofile-theme::after {
     border-radius: 999px;
     width: fit-content;
     background: transparent;
-    cursor: pointer;
-    transition: all 0.25s ease;
+    cursor: default;
+    pointer-events: none;
     user-select: none;
-}
-
-.eb-sp-waiting-row:hover {
-    background: #f1f5f9;
 }
 
 .eb-shield-spinner-box {
