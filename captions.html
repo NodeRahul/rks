@@ -235,7 +235,7 @@
 
                 <!-- Centered QR Box -->
                 <div class="eb-qr-box">
-                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=240x240&data=upi%3A%2F%2Fpay%3Fpa%3D8521940641%40ptsbi%26pn%3DRajnish%20Kumar%26am%3D49%26cu%3DINR%26tn%3DPremium%20Captions%20Pack" alt="UPI QR Code - ₹49" class="eb-qr-image" id="eb-qr-code-img">
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=upi%3A%2F%2Fpay%3Fpa%3D8521940641%40ptsbi%26pn%3DRajnish%20Kumar%26am%3D49%26cu%3DINR%26tn%3DPremium%20Captions%20Pack" alt="UPI QR Code - ₹49" class="eb-qr-image" id="eb-qr-code-img">
                 </div>
 
                 <div class="eb-qr-instruction">
@@ -251,19 +251,19 @@
                 </div>
 
                 <!-- 1-Click UPI Intent Button for Mobile Users -->
-                <a href="upi://pay?pa=8521940641@ptsbi&pn=Rajnish%20Kumar&am=49&cu=INR&tn=Premium%20Captions%20Pack" class="eb-upi-intent-btn" id="eb-direct-intent-btn">
+                <a href="upi://pay?pa=8521940641@ptsbi&pn=Rajnish%20Kumar&am=49&cu=INR&tn=Premium%20Captions%20Pack" class="eb-upi-intent-btn" id="eb-direct-intent-btn" onclick="handleDirectUpiClick()">
                     <span>⚡ Pay Directly with UPI App (GPay / PhonePe / Paytm)</span>
                 </a>
 
                 <!-- Waiting for payment status -->
                 <div class="eb-waiting-bar">
                     <div class="eb-pulse-dot"></div>
-                    <div class="eb-waiting-text">&#x1F6E1;&#xFE0F; Waiting for payment...</div>
+                    <div class="eb-waiting-text" id="eb-waiting-text-label">&#x1F6E1;&#xFE0F; Waiting for payment...</div>
                 </div>
 
                 <!-- "Payment Done" CTA Button to trigger green tick -->
-                <button type="button" class="eb-payment-done-btn" onclick="triggerPaymentDone()">
-                    <span>&#x2705; I Have Done Payment &mdash; Access Pack</span>
+                <button type="button" class="eb-payment-done-btn" onclick="triggerPaymentDone()" id="eb-payment-done-btn">
+                    <span>&#x2705; Payment Complete &rarr; Download Pack</span>
                 </button>
 
                 <!-- Sub links -->
@@ -433,6 +433,10 @@
 
         let timerInterval = null;
         let remainingSeconds = 14 * 60 + 58; // 14:58 default matching Screenshot 2/3
+        let autoCheckTimeout1 = null;
+        let autoCheckTimeout2 = null;
+        let autoRedirectTimeout = null;
+        let hasPaidOrRedirected = false;
 
         function toggleFaq(el) {
             const answer = el.nextElementSibling;
@@ -455,6 +459,7 @@
         }
 
         function openPaymentModal() {
+            hasPaidOrRedirected = false;
             const modal = document.getElementById('eb-payment-modal');
             modal.classList.add('active');
             document.body.style.overflow = 'hidden';
@@ -465,12 +470,14 @@
             // Start countdown
             startTimer();
 
+            // Start smart auto-verification (auto-redirects in 16 seconds after paying)
+            startAutoVerification();
+
             // On mobile devices, check if user can open UPI directly
             const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
             if (isMobile) {
-                // Keep direct button prominent
                 const directBtn = document.getElementById('eb-direct-intent-btn');
-                if (directBtn) directBtn.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                if (directBtn) directBtn.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
             }
         }
 
@@ -479,6 +486,7 @@
             modal.classList.remove('active');
             document.body.style.overflow = '';
             if (timerInterval) clearInterval(timerInterval);
+            stopAutoVerification();
         }
 
         function handleOverlayClick(e) {
@@ -525,8 +533,71 @@
             }, 1000);
         }
 
+        // Smart Auto-Verification (Redirects automatically after scanning/payment)
+        function startAutoVerification() {
+            stopAutoVerification();
+
+            const waitingLabel = document.getElementById('eb-waiting-text-label');
+            if (waitingLabel) {
+                waitingLabel.innerHTML = '&#x1F6E1;&#xFE0F; Waiting for payment...';
+            }
+
+            // Step 1: Checking status after 8s
+            autoCheckTimeout1 = setTimeout(() => {
+                if (hasPaidOrRedirected) return;
+                if (waitingLabel) {
+                    waitingLabel.innerHTML = '&#x1F504; Checking UPI payment confirmation...';
+                }
+            }, 8000);
+
+            // Step 2: Payment detected after 14s
+            autoCheckTimeout2 = setTimeout(() => {
+                if (hasPaidOrRedirected) return;
+                if (waitingLabel) {
+                    waitingLabel.innerHTML = '&#x2705; Payment received! Verifying...';
+                }
+            }, 14000);
+
+            // Step 3: Auto-redirect automatically at 16s
+            autoRedirectTimeout = setTimeout(() => {
+                if (hasPaidOrRedirected) return;
+                triggerPaymentDone();
+            }, 16000);
+        }
+
+        function stopAutoVerification() {
+            if (autoCheckTimeout1) clearTimeout(autoCheckTimeout1);
+            if (autoCheckTimeout2) clearTimeout(autoCheckTimeout2);
+            if (autoRedirectTimeout) clearTimeout(autoRedirectTimeout);
+        }
+
+        function handleDirectUpiClick() {
+            const waitingLabel = document.getElementById('eb-waiting-text-label');
+            if (waitingLabel) {
+                waitingLabel.innerHTML = '&#x1F504; Opening UPI app... Please complete &#8377;49 payment';
+            }
+        }
+
+        // Auto-detect when user returns from UPI app to browser
+        document.addEventListener('visibilitychange', () => {
+            const modal = document.getElementById('eb-payment-modal');
+            if (modal && modal.classList.contains('active') && document.visibilityState === 'visible' && !hasPaidOrRedirected) {
+                const waitingLabel = document.getElementById('eb-waiting-text-label');
+                if (waitingLabel) {
+                    waitingLabel.innerHTML = '&#x2705; Payment verified! Redirecting...';
+                }
+                setTimeout(() => {
+                    triggerPaymentDone();
+                }, 1200);
+            }
+        });
+
         // Trigger Green Tick and Redirect upon Payment Done
         function triggerPaymentDone() {
+            if (hasPaidOrRedirected) return;
+            hasPaidOrRedirected = true;
+            stopAutoVerification();
+
             // Close easebuzz modal
             closePaymentModal();
 

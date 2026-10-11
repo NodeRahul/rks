@@ -895,13 +895,13 @@ body.superprofile-theme::after {
 
 .eb-modal-container {
     width: 100%;
-    max-width: 440px;
+    max-width: 410px;
     background: #ffffff;
     border-radius: 20px;
     overflow: hidden;
     box-shadow: 0 25px 60px rgba(0, 0, 0, 0.45);
     animation: ebModalSlide 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    max-height: 94vh;
+    max-height: 96vh;
     overflow-y: auto;
 }
 
@@ -913,7 +913,7 @@ body.superprofile-theme::after {
 /* Top bar with cancel and powered by */
 .eb-gateway-topbar {
     background: #1e293b;
-    padding: 12px 18px;
+    padding: 10px 16px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -959,9 +959,9 @@ body.superprofile-theme::after {
     background: #4338ca;
     color: #ffffff;
     text-align: center;
-    font-size: 0.8rem;
+    font-size: 0.78rem;
     font-weight: 600;
-    padding: 6px 12px;
+    padding: 5px 12px;
     letter-spacing: 0.3px;
 }
 
@@ -973,7 +973,7 @@ body.superprofile-theme::after {
 /* Merchant Blue Banner */
 .eb-merchant-bar {
     background: #3730a3;
-    padding: 14px 18px;
+    padding: 10px 16px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -987,14 +987,14 @@ body.superprofile-theme::after {
 }
 
 .eb-merchant-logo {
-    width: 36px;
-    height: 36px;
+    width: 32px;
+    height: 32px;
     border-radius: 10px;
     background: #ffffff;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     box-shadow: 0 2px 8px rgba(0,0,0,0.2);
 }
 
@@ -1004,13 +1004,13 @@ body.superprofile-theme::after {
 }
 
 .eb-merchant-url {
-    font-size: 0.88rem;
+    font-size: 0.85rem;
     font-weight: 700;
     color: #ffffff;
 }
 
 .eb-order-id {
-    font-size: 0.75rem;
+    font-size: 0.72rem;
     color: #c7d2fe;
 }
 
@@ -1023,57 +1023,58 @@ body.superprofile-theme::after {
 
 /* Content views */
 .eb-view-content {
-    padding: 20px 22px 24px;
+    padding: 14px 18px 16px;
 }
 
 /* RuPay UPI Banner (Screenshot 3) */
 .eb-rupay-banner {
     background: #f1f5f9;
     border: 1px solid #e2e8f0;
-    border-radius: 12px;
-    padding: 10px 14px;
-    font-size: 0.82rem;
+    border-radius: 10px;
+    padding: 7px 12px;
+    font-size: 0.78rem;
     color: #334155;
-    line-height: 1.4;
+    line-height: 1.35;
     display: flex;
     align-items: center;
-    gap: 10px;
-    margin-bottom: 18px;
+    gap: 8px;
+    margin-bottom: 10px;
 }
 
 .eb-rupay-icon {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
 }
 
 /* Centered QR Box */
 .eb-qr-box {
     text-align: center;
-    margin: 10px auto 16px;
-    padding: 12px;
+    margin: 4px auto 8px;
+    padding: 8px;
     background: #ffffff;
     border: 1.5px solid #e2e8f0;
-    border-radius: 16px;
+    border-radius: 14px;
     display: block;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+    width: fit-content;
 }
 
 .eb-qr-image {
-    width: 210px;
-    height: 210px;
+    width: 165px;
+    height: 165px;
     display: block;
     margin: 0 auto;
 }
 
 .eb-qr-instruction {
     text-align: center;
-    font-size: 0.96rem;
+    font-size: 0.88rem;
     color: #1e293b;
-    margin-bottom: 14px;
-    line-height: 1.45;
+    margin-bottom: 8px;
+    line-height: 1.35;
 }
 
 .eb-qr-instruction strong {
-    font-size: 1.12rem;
+    font-size: 1.05rem;
     color: #0f172a;
     font-weight: 800;
 }
@@ -1083,16 +1084,16 @@ body.superprofile-theme::after {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 10px;
-    margin-bottom: 16px;
+    gap: 8px;
+    margin-bottom: 10px;
 }
 
 .eb-app-pill {
-    padding: 4px 12px;
+    padding: 3px 10px;
     background: #f8fafc;
     border: 1px solid #e2e8f0;
     border-radius: 999px;
-    font-size: 0.78rem;
+    font-size: 0.74rem;
     font-weight: 700;
     color: #475569;
 }
@@ -1110,11 +1111,11 @@ body.superprofile-theme::after {
     color: #ffffff;
     text-align: center;
     text-decoration: none;
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     font-weight: 700;
-    padding: 13px;
+    padding: 11px;
     border-radius: 10px;
-    margin-bottom: 12px;
+    margin-bottom: 8px;
     box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
     transition: all 0.2s ease;
 }
@@ -1129,16 +1130,16 @@ body.superprofile-theme::after {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 10px;
-    padding: 12px;
+    gap: 8px;
+    padding: 9px 12px;
     background: #f0fdf4;
     border: 1px solid #bbf7d0;
-    border-radius: 12px;
-    margin-bottom: 14px;
+    border-radius: 10px;
+    margin-bottom: 8px;
 }
 
 .eb-waiting-text {
-    font-size: 0.88rem;
+    font-size: 0.82rem;
     font-weight: 700;
     color: #166534;
     display: flex;
@@ -1162,21 +1163,32 @@ body.superprofile-theme::after {
 
 .eb-payment-done-btn {
     width: 100%;
-    background: #10b981;
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
     color: #ffffff;
     border: none;
-    padding: 14px;
+    padding: 13px 16px;
     border-radius: 10px;
-    font-size: 1rem;
+    font-size: 0.96rem;
     font-weight: 800;
     cursor: pointer;
-    box-shadow: 0 4px 14px rgba(16, 185, 129, 0.4);
+    box-shadow: 0 4px 16px rgba(16, 185, 129, 0.45);
     transition: all 0.2s ease;
-    margin-bottom: 14px;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    animation: ebDonePulse 2s infinite;
+}
+
+@keyframes ebDonePulse {
+    0% { transform: scale(1); box-shadow: 0 4px 16px rgba(16, 185, 129, 0.45); }
+    50% { transform: scale(1.02); box-shadow: 0 6px 22px rgba(16, 185, 129, 0.65); }
+    100% { transform: scale(1); box-shadow: 0 4px 16px rgba(16, 185, 129, 0.45); }
 }
 
 .eb-payment-done-btn:hover {
-    background: #059669;
+    background: linear-gradient(135deg, #059669 0%, #047857 100%);
     transform: translateY(-2px);
 }
 
