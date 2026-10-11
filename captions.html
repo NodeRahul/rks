@@ -174,16 +174,32 @@
                     <!-- Payment Details Reveal Box -->
                     <div class="sp-pay-drawer" id="sp-pay-drawer">
                         <div class="sp-qr-center">
-                            <strong style="color: #92400e; font-size: 0.95rem;">Scan & Pay &#8377;49 via GPay / PhonePe / Paytm</strong>
-                            <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=upi%3A%2F%2Fpay%3Fpa%3D8521940641%40ybl%26pn%3DRajnish%20Kumar%26am%3D49%26cu%3DINR%26tn%3DPremium%20Captions%20Pack" alt="UPI QR Code" class="sp-qr-img">
-                            
-                            <div class="sp-upi-id-copy" onclick="copyUpiId()">
-                                <span>UPI: <strong>8521940641@ybl</strong></span>
-                                <span style="font-size: 0.8rem; color: #f59e0b;">[Copy]</span>
+                            <!-- Direct 1-Click UPI App Launch Button (For Mobile users) -->
+                            <a href="upi://pay?pa=8521940641@ptsbi&pn=Rajnish%20Kumar&am=49&cu=INR&tn=Premium%20Captions%20Pack" class="sp-upi-direct-btn" id="sp-upi-direct-link">
+                                <span>⚡ Open UPI App & Pay ₹49</span>
+                                <span style="font-size: 0.8rem; opacity: 0.9;">(GPay / PhonePe / Paytm / BHIM)</span>
+                            </a>
+
+                            <div class="sp-or-divider">
+                                <span>OR SCAN QR CODE</span>
                             </div>
 
-                            <a href="https://wa.me/918521940641?text=Hi%20Rajnish%2C%20I%20have%20paid%20Rs.49%20for%20the%20100%2B%20Premium%20Captions%20Pack.%20Please%20send%20me%20the%20Drive%20download%20link." target="_blank" class="sp-wa-btn" id="sp-wa-link">
-                                <span>Send Payment on WhatsApp</span>
+                            <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=upi%3A%2F%2Fpay%3Fpa%3D8521940641%40ptsbi%26pn%3DRajnish%20Kumar%26am%3D49%26cu%3DINR%26tn%3DPremium%20Captions%20Pack" alt="UPI QR Code - Pay ₹49 to 8521940641@ptsbi" class="sp-qr-img">
+                            
+                            <div class="sp-upi-id-copy" onclick="copyUpiId()" title="Click to copy UPI ID">
+                                <span>UPI: <strong id="sp-upi-val">8521940641@ptsbi</strong></span>
+                                <span class="sp-copy-badge">📋 Copy</span>
+                            </div>
+
+                            <div class="sp-upi-apps-row">
+                                <span class="sp-app-tag">GPay</span>
+                                <span class="sp-app-tag">PhonePe</span>
+                                <span class="sp-app-tag">Paytm</span>
+                                <span class="sp-app-tag">BHIM</span>
+                            </div>
+
+                            <a href="https://wa.me/918521940641?text=Hi%20Rajnish%2C%20I%20have%20paid%20Rs.49%20to%208521940641%40ptsbi%20for%20the%20100%2B%20Premium%20Captions%20Pack.%20Please%20send%20me%20the%20Drive%20download%20link." target="_blank" class="sp-wa-btn" id="sp-wa-link">
+                                <span>💬 Send Screenshot on WhatsApp</span>
                                 <span>&rarr;</span>
                             </a>
                         </div>
@@ -207,6 +223,9 @@
     <div class="sp-toast" id="sp-toast">Link copied to clipboard!</div>
 
     <script>
+        const UPI_ID = '8521940641@ptsbi';
+        const UPI_URL = 'upi://pay?pa=' + encodeURIComponent(UPI_ID) + '&pn=Rajnish%20Kumar&am=49&cu=INR&tn=Premium%20Captions%20Pack';
+
         function toggleFaq(el) {
             const answer = el.nextElementSibling;
             if (answer.style.display === 'block') {
@@ -229,17 +248,23 @@
 
             // Update WhatsApp link with details
             const waMsg = encodeURIComponent(
-                `Hi Rajnish!\nI want the 100+ Premium Captions Pack (Rs 49).\nEmail: ${email}\nPhone: ${phone}\nSending payment screenshot:`
+                `Hi Rajnish!\nI have made payment of Rs 49 to ${UPI_ID} for 100+ Premium Captions Pack.\nEmail: ${email}\nPhone: ${phone}\nSending payment screenshot:`
             );
             document.getElementById('sp-wa-link').href = `https://wa.me/918521940641?text=${waMsg}`;
 
             // Smooth scroll to payment drawer
             drawer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+            // Automatically attempt to launch UPI App on mobile devices
+            const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+            if (isMobile) {
+                window.location.href = UPI_URL;
+            }
         }
 
         function copyUpiId() {
-            navigator.clipboard.writeText('8521940641@ybl').then(() => {
-                showToast('UPI ID copied: 8521940641@ybl');
+            navigator.clipboard.writeText(UPI_ID).then(() => {
+                showToast('UPI ID copied: ' + UPI_ID);
             });
         }
 

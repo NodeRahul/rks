@@ -37,7 +37,7 @@ website for premier/
 4. **Interactive UPI & WhatsApp Checkout Modal**:
    - Instant popup jab user *"Get Instant Access @ ₹49"* par click kare.
    - **Dynamic UPI QR Code**: Scan & Pay ₹49 directly via GPay / PhonePe / Paytm / BHIM.
-   - **Copy UPI ID Button**: Instant 1-click clipboard copy (`8521940641@ybl`).
+   - **Copy UPI ID Button**: Instant 1-click clipboard copy (`8521940641@ptsbi`).
    - **Direct WhatsApp Instant Buy Button**: Pre-filled WhatsApp message direct aapke WhatsApp (`+91 8521940641`) par send hota hai.
 5. **Preset Category Grid**:
    - 6 visually rich cards (Hormozi, Vox, Cinematic, Karaoke, Cyber, SFX).
@@ -53,7 +53,7 @@ website for premier/
 ### 1. UPI ID Badalna
 Agar aapko UPI ID change karni ho, `index.html` me line search karein:
 ```html
-<span class="upi-code" id="upi-id-text">8521940641@ybl</span>
+<span class="upi-code" id="upi-id-text">8521940641@ptsbi</span>
 ```
 Aur QR code URL me bhi update kar sakte hain:
 ```html
