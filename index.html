@@ -348,10 +348,27 @@
 
 
     <!-- ==========================================================================
-         PREMIUM CAPTIONS PACK SECTION (₹49 ONLY)
+         PREMIUM CAPTIONS PACK SECTION (₹49 ONLY) - DEDICATED OVERLAY VIEW
          ========================================================================== -->
-    <section class="captions-pack-section" id="captions-pack">
-        <div class="container">
+    <section class="captions-pack-section" id="captions-pack" aria-modal="true" role="dialog" aria-label="100+ Premium Viral Captions Pack">
+        <!-- Sticky Overlay Navigation Bar -->
+        <div class="captions-overlay-nav">
+            <div class="container captions-overlay-nav-inner">
+                <button type="button" class="captions-back-btn" id="captions-overlay-back-btn" title="Back to Portfolio">
+                    <i data-lucide="arrow-left"></i>
+                    <span>Back to Portfolio</span>
+                </button>
+                <div class="captions-overlay-brand">
+                    <span class="captions-pill-fire">🔥 ₹49 ONLY</span>
+                    <span class="captions-brand-text">100+ Premium Captions Pack</span>
+                </div>
+                <button type="button" class="captions-close-btn" id="captions-overlay-close-btn" aria-label="Close overlay" title="Close (Esc)">
+                    <i data-lucide="x"></i>
+                </button>
+            </div>
+        </div>
+
+        <div class="container captions-overlay-body">
             
             <!-- Section Header & Urgency Countdown -->
             <div class="captions-header-wrapper">
@@ -1133,9 +1150,13 @@
         </div>
     </footer>
 
+    <!-- Floating Quick Access Pill for ₹49 Pack -->
+    <a href="#captions-pack" class="floating-captions-pill" id="floating-captions-trigger" title="Get 100+ Viral Captions Pack for ₹49">
+        <span class="fcp-pulse"></span>
+        <span class="fcp-icon">⚡</span>
+        <span class="fcp-text">Captions Pack <strong>₹49</strong></span>
+    </a>
 
-
-    
     <!-- Captions Checkout Modal -->
     <div class="captions-modal" id="captions-checkout-modal">
         <div class="captions-modal-backdrop" id="captions-modal-backdrop"></div>

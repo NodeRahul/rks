@@ -944,4 +944,96 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    /* ==========================================================================
+       5. Dedicated Captions Pack Overlay Toggle Logic
+       ========================================================================== */
+    const captionsSection = document.getElementById('captions-pack');
+    const overlayBackBtn = document.getElementById('captions-overlay-back-btn');
+    const overlayCloseBtn = document.getElementById('captions-overlay-close-btn');
+    const captionsTriggers = document.querySelectorAll('a[href="#captions-pack"], #floating-captions-trigger');
+
+    function openCaptionsOverlay() {
+        if (!captionsSection) return;
+        captionsSection.classList.add('active');
+        document.body.classList.add('captions-overlay-open');
+        captionsSection.scrollTop = 0;
+        
+        // Ensure reveal items inside captions pack are visible
+        captionsSection.querySelectorAll('.reveal-item').forEach(el => {
+            el.classList.add('revealed');
+        });
+
+        if (typeof lucide !== 'undefined' && lucide.createIcons) {
+            lucide.createIcons();
+        }
+
+        if (window.location.hash !== '#captions-pack') {
+            try {
+                history.pushState({ overlay: 'captions' }, '', '#captions-pack');
+            } catch(e) {}
+        }
+    }
+
+    function closeCaptionsOverlay(skipHistory) {
+        if (!captionsSection) return;
+        captionsSection.classList.remove('active');
+        document.body.classList.remove('captions-overlay-open');
+
+        // Close checkout modal if open
+        if (captionsModal && captionsModal.classList.contains('active')) {
+            closeCheckoutModal();
+        }
+
+        if (!skipHistory && window.location.hash === '#captions-pack') {
+            try {
+                history.pushState(null, '', window.location.pathname + window.location.search);
+            } catch(e) {}
+        }
+    }
+
+    // Attach click handlers to all triggers (navbar link, mobile menu, footer, floating button)
+    captionsTriggers.forEach(trigger => {
+        trigger.addEventListener('click', (e) => {
+            e.preventDefault();
+            // Close mobile menu if open
+            if (mobileNav && mobileNav.classList.contains('active')) {
+                mobileNav.classList.remove('active');
+            }
+            openCaptionsOverlay();
+        });
+    });
+
+    if (overlayBackBtn) {
+        overlayBackBtn.addEventListener('click', () => closeCaptionsOverlay());
+    }
+
+    if (overlayCloseBtn) {
+        overlayCloseBtn.addEventListener('click', () => closeCaptionsOverlay());
+    }
+
+    // Handle Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            if (captionsModal && captionsModal.classList.contains('active')) {
+                closeCheckoutModal();
+            } else if (captionsSection && captionsSection.classList.contains('active')) {
+                closeCaptionsOverlay();
+            }
+        }
+    });
+
+    // Check on initial page load if hash is #captions-pack
+    if (window.location.hash === '#captions-pack') {
+        openCaptionsOverlay();
+    }
+
+    // Handle browser back/forward buttons
+    window.addEventListener('popstate', () => {
+        if (window.location.hash === '#captions-pack') {
+            openCaptionsOverlay();
+        } else if (captionsSection && captionsSection.classList.contains('active')) {
+            closeCaptionsOverlay(true);
+        }
+    });
+
 });
